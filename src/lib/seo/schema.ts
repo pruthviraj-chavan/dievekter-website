@@ -1,4 +1,9 @@
-import { SITE_CONFIG, SITE_URL, toAbsoluteUrl } from "@/config/site";
+import {
+  OFFICE_LOCATIONS,
+  SITE_CONFIG,
+  SITE_URL,
+  toAbsoluteUrl,
+} from "@/config/site";
 
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const LOCAL_BUSINESS_ID = `${SITE_URL}/#localbusiness`;
@@ -68,6 +73,9 @@ export function buildOrganizationSchema() {
 }
 
 export function buildLocalBusinessSchema() {
+  const hq = OFFICE_LOCATIONS[0];
+  const branches = OFFICE_LOCATIONS.slice(1);
+
   return {
     "@type": ["ProfessionalService", "LocalBusiness"],
     "@id": LOCAL_BUSINESS_ID,
@@ -80,12 +88,48 @@ export function buildLocalBusinessSchema() {
     email: SITE_CONFIG.email,
     telephone: SITE_CONFIG.telephoneE164,
     parentOrganization: { "@id": ORG_ID },
+    hasMap: hq.directionsUrl,
     address: {
       "@type": "PostalAddress",
-      addressLocality: `${SITE_CONFIG.city}, ${SITE_CONFIG.district}`,
-      addressRegion: SITE_CONFIG.region,
+      streetAddress: hq.streetAddress,
+      addressLocality: hq.locality,
+      addressRegion: hq.region,
+      postalCode: hq.postalCode,
       addressCountry: SITE_CONFIG.country,
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: hq.lat,
+      longitude: hq.lng,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "09:30",
+        closes: "19:00",
+      },
+    ],
+    department: branches.map((branch) => ({
+      "@type": "LocalBusiness",
+      name: `${SITE_CONFIG.alternateName} — ${branch.city}`,
+      telephone: SITE_CONFIG.telephoneE164,
+      email: SITE_CONFIG.email,
+      hasMap: branch.directionsUrl,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: branch.streetAddress,
+        addressLocality: branch.locality,
+        addressRegion: branch.region,
+        postalCode: branch.postalCode,
+        addressCountry: SITE_CONFIG.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: branch.lat,
+        longitude: branch.lng,
+      },
+    })),
     areaServed: SITE_CONFIG.areaServed.map((area) => ({
       "@type": "Place",
       name: area,
@@ -119,19 +163,22 @@ export function buildWebPageSchema({
   title,
   description,
   path,
+  pageType = "WebPage",
 }: {
   title: string;
   description: string;
   path: string;
+  pageType?: "WebPage" | "ContactPage" | "AboutPage";
 }) {
   const url = toAbsoluteUrl(path);
   return {
-    "@type": "WebPage",
+    "@type": pageType,
     "@id": `${url}#webpage`,
     url,
     name: title,
     description,
     inLanguage: "en-IN",
+    isPartOf: { "@id": WEBSITE_ID },
   };
 }
 
@@ -152,7 +199,7 @@ export function buildServiceSchema({
   description,
   path,
   serviceType,
-  areaServed = ["Kolhapur", "Pune", "Maharashtra", "India", "Global"],
+  areaServed = ["Radhanagari", "Kolhapur", "Phondaghat", "Pune", "Maharashtra", "India", "Global"],
 }: {
   name: string;
   description: string;

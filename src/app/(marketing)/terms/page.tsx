@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import { SiteNav } from "@/components/dv/SiteNav";
-import { SiteFooter } from "@/components/dv/SiteFooter";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { LegalDocumentLayout, type LegalTocItem } from "@/components/legal/LegalDocumentLayout";
 import { SITE_CONFIG } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/metadata";
-import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
 const TITLE = "Terms of Service & Consultancy Disclosures";
 const DESC =
-  "Terms governing website usage, software development engagements and Study Abroad Consultancy scope & official embassy/university disclaimers for DIEVEKTER.";
+  "Commercial Terms of Service governing DIEVEKTER custom software, AI systems & SaaS delivery, plus mandatory Study Abroad Consultancy & official embassy disclaimers.";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/terms",
@@ -18,133 +14,155 @@ export const metadata: Metadata = buildPageMetadata({
   description: DESC,
 });
 
+const TOC: LegalTocItem[] = [
+  { id: "identity", title: "1. Business Identity & Independence" },
+  { id: "technology-scope", title: "2. Technology & Software Services Scope" },
+  { id: "ip-commercials", title: "3. Milestones, Payment & IP Transfer" },
+  { id: "study-abroad", title: "4. Study Abroad Consultancy Disclosures" },
+  { id: "official-portals", title: "5. Official University & Visa Portals" },
+  { id: "support-aup", title: "6. Support Policy & Acceptable Use" },
+  { id: "liability", title: "7. Indemnification & Liability" },
+  { id: "termination", title: "8. Term, Suspension & Law" },
+];
+
 export default function TermsPage() {
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-white text-[#141210]">
-      <JsonLd
-        nodes={[
-          buildWebPageSchema({ title: TITLE, description: DESC, path: "/terms" }),
-          buildBreadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Terms & Disclaimers", path: "/terms" },
-          ]),
-        ]}
-      />
-      <SiteNav />
+    <LegalDocumentLayout
+      path="/terms"
+      badge="Terms of Service & Disclosures"
+      title="Terms of Service"
+      metaTitle={TITLE}
+      description={DESC}
+      lastUpdated="November 25, 2026"
+      importantNote="Custom software engagements require a written Statement of Work (SOW). Study Abroad consultancy is strictly advisory — DIEVEKTER is a private Indian enterprise and has zero authority over university admissions or embassy visa decisions."
+      toc={TOC}
+    >
+      <section id="identity" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          1. Business Identity &amp; Non-Government Status
+        </h2>
+        <p>
+          {SITE_CONFIG.legalName} (&ldquo;dieVekter&rdquo;) is an Indian private business
+          enterprise registered under the Ministry of MSME Udyam framework (Registration Number:{" "}
+          <strong>{SITE_CONFIG.udyam}</strong>) with Head Office in Radhanagari, Kolhapur,
+          Maharashtra and branches in Kolhapur (Rajarampuri) &amp; Phondaghat, listed with Dun
+          &amp; Bradstreet (D-U-N-S: <strong>{SITE_CONFIG.duns}</strong>). We are not affiliated
+          with, endorsed by, or acting on behalf of any government department, diplomatic mission,
+          statutory university board, or APS authority.
+        </p>
+      </section>
 
-      <main className="flex-grow pt-24 sm:pt-28 pb-20">
-        <section className="dv-dot-bg py-12 sm:py-16">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-4xl">
-            <nav aria-label="Breadcrumb" className="mb-5">
-              <ol className="inline-flex items-center gap-1.5 text-xs text-stone-500">
-                <li>
-                  <Link href="/" className="hover:text-[#FF5422]">
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden="true">
-                  <ChevronRight className="h-3.5 w-3.5 text-stone-400" />
-                </li>
-                <li className="font-semibold text-[#141210]" aria-current="page">
-                  Terms &amp; Disclaimers
-                </li>
-              </ol>
-            </nav>
+      <section id="technology-scope" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          2. Technology, AI &amp; Software Services Scope
+        </h2>
+        <p>
+          All website development, e-commerce engineering, mobile applications, AI voice/chat
+          agents, RAG pipelines, CRM integrations, workflow automations, and SaaS deployments
+          (including Smart Billing &amp; Stock, Attendance, and CRM tools) are governed by an agreed
+          written proposal or Statement of Work (SOW) specifying deliverables, target timelines,
+          acceptance criteria, and third-party API/cloud hosting responsibilities.
+        </p>
+      </section>
 
-            <span className="inline-block rounded-full bg-[#FF5422] px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white mb-4">
-              Legal &amp; Governance
-            </span>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-[#141210] mb-4">
-              Terms of Service &amp; Disclosures
-            </h1>
-            <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-              Terms governing the use of www.dievekter.com, software &amp; AI consulting
-              engagements, and Study Abroad Consultancy guidance offered by {SITE_CONFIG.legalName} (&ldquo;dieVekter&rdquo;).
-            </p>
-            <p className="mt-3 text-xs text-stone-400">Last updated: October 2026</p>
-          </div>
-        </section>
+      <section id="ip-commercials" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          3. Milestones, Commercial Terms &amp; Intellectual Property
+        </h2>
+        <p>
+          Unless expressly stated otherwise in an SOW, custom project deliverables and source
+          repositories transfer to the client upon clearance of the applicable milestone invoices.
+          DIEVEKTER retains ownership of pre-existing internal engineering frameworks, reusable UI
+          primitives, and general know-how unless explicitly licensed or assigned in writing.
+          Third-party API costs (e.g., LLM token APIs, WhatsApp Business APIs, cloud hosting tiers)
+          remain the client&apos;s responsibility directly with respective providers.
+        </p>
+      </section>
 
-        <section className="border-t border-stone-100 bg-white py-12">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-4xl space-y-8 text-sm leading-relaxed text-stone-700">
-            <div>
-              <h2 className="text-xl font-bold text-[#141210] mb-2">
-                1. Business Identity &amp; Non-Government Status
-              </h2>
-              <p>
-                {SITE_CONFIG.legalName} (&ldquo;dieVekter&rdquo;) is a private business enterprise registered under India&apos;s
-                Udyam framework (Udyam Registration Number: {SITE_CONFIG.udyam}) in {SITE_CONFIG.city},
-                {SITE_CONFIG.district}, {SITE_CONFIG.region}, India, and listed with Dun &amp; Bradstreet (D-U-N-S: {SITE_CONFIG.duns}).
-                We are not affiliated with, endorsed by, or part of any government body, embassy or
-                statutory agency.
-              </p>
-            </div>
+      <section id="study-abroad" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          4. Study Abroad Consultancy Disclosures
+        </h2>
+        <p>
+          Overseas education counselling, course shortlisting, Study in Germany roadmaps, Statement
+          of Purpose / academic CV reviews, application organization, and visa file checklist
+          assistance are strictly educational advisory services:
+        </p>
+        <ul className="list-disc pl-5 space-y-1.5">
+          <li>
+            All admission offers are decided solely by the admitting higher education institution.
+          </li>
+          <li>
+            All National (Type D) student visas and residence decisions rest exclusively with the
+            concerned Embassy or Consulate General.
+          </li>
+          <li>
+            DIEVEKTER never sells fake admission letters, never writes fabricated statements, and
+            never guarantees university admission or visa approval.
+          </li>
+          <li>
+            Any applicable advisory fees depend cleanly on service scope and are disclosed in
+            writing prior to enrollment.
+          </li>
+        </ul>
+      </section>
 
-            <div>
-              <h2 className="text-xl font-bold text-[#141210] mb-2">
-                2. Technology &amp; Software Services Scope
-              </h2>
-              <p>
-                Custom software, website development, mobile app development, AI agents and business
-                automation deliverables are governed by written project proposals or statements of work
-                specifying milestones, intellectual property ownership, timelines and commercial terms
-                confirmed directly between dieVekter and the client prior to kickoff.
-              </p>
-            </div>
+      <section id="official-portals" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          5. Official University &amp; Visa Portals
+        </h2>
+        <p>
+          Visa fee schedules, blocked account statutory amounts, APS India steps, and semester
+          deadlines can change without notice by foreign authorities. Applicants must always cross-check
+          final requirements on official primary websites (DAAD, APS India, uni-assist, and German
+          Missions in India).
+        </p>
+      </section>
 
-            <div>
-              <h2 className="text-xl font-bold text-[#141210] mb-2">
-                3. Study Abroad Consultancy Disclosures
-              </h2>
-              <p>
-                All overseas education, university shortlisting, Study in Germany, admission
-                assistance and student visa checklist materials published on this site are general
-                informational guidance only. Admissions decisions remain exclusively with the
-                respective universities, and student visa approvals rest solely with the concerned
-                embassies or consulates. dieVekter does not issue visas, does not alter official
-                eligibility criteria, and never guarantees admission or visa outcomes. Consultancy fees
-                and deliverables are always confirmed in writing prior to paid engagement.
-              </p>
-            </div>
+      <section id="support-aup" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          6. Support Policy &amp; Acceptable Use
+        </h2>
+        <p>
+          Post-launch maintenance, uptime support tiers, and counselling hours are detailed in our{" "}
+          <Link href="/support-policy" className="text-[#FF5422] underline">
+            Support Policy
+          </Link>
+          . Prohibited technical, AI agent, and academic documentation conduct is defined in our{" "}
+          <Link href="/acceptable-use" className="text-[#FF5422] underline">
+            Acceptable Use Policy
+          </Link>
+          .
+        </p>
+      </section>
 
-            <div>
-              <h2 className="text-xl font-bold text-[#141210] mb-2">
-                4. External Official Portals &amp; Accuracy
-              </h2>
-              <p>
-                For German higher education and visa rules, applicants should always verify live rules
-                on official websites such as DAAD, APS India, uni-assist and the German Missions in
-                India. Statutory rules, semester timelines and financial requirements change without
-                prior notice.
-              </p>
-            </div>
+      <section id="liability" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          7. Indemnification &amp; Limitation of Liability
+        </h2>
+        <p>
+          Clients and applicants indemnify DIEVEKTER against claims resulting from inaccurate
+          information, unauthorized proprietary assets, or unverified third-party credentials
+          supplied by them. Except in cases of willful misconduct, our aggregate contractual
+          liability for any paid engagement shall not exceed the fees actually paid to DIEVEKTER
+          under that specific engagement during the preceding 6 months.
+        </p>
+      </section>
 
-            <div>
-              <h2 className="text-xl font-bold text-[#141210] mb-2">
-                5. Contact for Legal &amp; Privacy Questions
-              </h2>
-              <p>
-                Email{" "}
-                <a
-                  href={`mailto:${SITE_CONFIG.email}`}
-                  className="font-semibold text-[#FF5422] underline underline-offset-4"
-                >
-                  {SITE_CONFIG.email}
-                </a>{" "}
-                or call {SITE_CONFIG.telephone}. See also our{" "}
-                <Link
-                  href="/privacy"
-                  className="font-semibold text-[#141210] underline underline-offset-4 hover:text-[#FF5422]"
-                >
-                  Privacy Policy
-                </Link>
-                .
-              </p>
-            </div>
-          </div>
-        </section>
-      </main>
-      <SiteFooter />
-    </div>
+      <section id="termination" className="scroll-mt-28 space-y-3">
+        <h2 className="text-xl font-bold text-[#141210]">
+          8. Termination &amp; Legal Contact
+        </h2>
+        <p>
+          Either party may terminate an active engagement per the notice period written inside its
+          SOW or advisory agreement, subject to settlement for completed milestones. These terms are
+          governed by the laws of India with jurisdiction in Kolhapur, Maharashtra. Contact{" "}
+          <a href={`mailto:${SITE_CONFIG.email}`} className="font-semibold text-[#FF5422] underline">
+            {SITE_CONFIG.email}
+          </a>{" "}
+          with legal questions.
+        </p>
+      </section>
+    </LegalDocumentLayout>
   );
 }

@@ -28,7 +28,7 @@ export const MOBILE_EXTRA_LINKS = [
   { name: "Portfolio", href: "/portfolio" },
   { name: "Products", href: "/products" },
   { name: "Internships", href: "/internship" },
-  { name: "Terms & Legal", href: "/terms" },
+  { name: "Legal & Privacy", href: "/privacy" },
 ] as const;
 
 export const SOCIAL_LINKS = [
@@ -39,6 +39,14 @@ export const SOCIAL_LINKS = [
     label: "WhatsApp",
     href: "https://wa.me/919404895667?text=Hi%20Dievekter%20Tech!%20I%20would%20like%20to%20discuss%20a%20project.",
   },
+] as const;
+
+export const FOOTER_LEGAL_LINKS = [
+  { name: "Website Terms of Use", href: "/terms-of-use" },
+  { name: "Privacy Policy", href: "/privacy" },
+  { name: "Terms of Service", href: "/terms" },
+  { name: "Support Policy", href: "/support-policy" },
+  { name: "Acceptable Use Policy", href: "/acceptable-use" },
 ] as const;
 
 export const FOOTER_COLUMNS = [
@@ -73,16 +81,19 @@ export const FOOTER_COLUMNS = [
       { name: "Systems Portfolio", href: "/portfolio" },
       { name: "Software Products", href: "/products" },
       { name: "Editorial Journal", href: "/blog" },
-      { name: "Contact Us", href: "/contact" },
+      { name: "Office Locations", href: "/contact#office-maps" },
+      { name: "Careers & Jobs", href: "/jobs" },
+      { name: "Internships", href: "/internship" },
     ],
   },
   {
-    heading: "Legal & Region",
+    heading: "Legal & Compliance",
     links: [
       { name: "Privacy Policy", href: "/privacy" },
-      { name: "Terms & Disclaimers", href: "/terms" },
-      { name: "Careers & Jobs", href: "/jobs" },
-      { name: "Internships", href: "/internship" },
+      { name: "Website Terms of Use", href: "/terms-of-use" },
+      { name: "Terms of Service", href: "/terms" },
+      { name: "Support Policy", href: "/support-policy" },
+      { name: "Acceptable Use Policy", href: "/acceptable-use" },
       { name: "Developer Kit", href: "/development-kit" },
     ],
   },

@@ -84,6 +84,9 @@ async function main() {
       { path: "/development-kit", noindex: false },
       { path: "/privacy", noindex: false },
       { path: "/terms", noindex: false },
+      { path: "/terms-of-use", noindex: false },
+      { path: "/support-policy", noindex: false },
+      { path: "/acceptable-use", noindex: false },
       { path: "/fun", noindex: true },
       { path: "/services/refer", noindex: true },
     ];

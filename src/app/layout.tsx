@@ -79,9 +79,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gaId = getGaMeasurementId();
-  const jotformId =
-    process.env.NEXT_PUBLIC_JOTFORM_AGENT_ID?.trim() ||
-    "01977c9728aa7bd786fd0916cebd6b1ca44e";
 
   return (
     <html lang="en-IN" className={`${sansFont.variable} ${serifFont.variable} light`}>
@@ -101,12 +98,6 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${gaId}');`}
         </Script>
-
-        {/* Jotform Assistant Widget (deferred cleanly for performance) */}
-        <Script
-          src={`https://cdn.jotfor.ms/agent/embedjs/${jotformId}/embed.js?skipWelcome=1&maximizable=1`}
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   );

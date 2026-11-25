@@ -47,7 +47,7 @@ src/
 │   ├── error.tsx                            # Client error boundary UI
 │   ├── globals.css                          # Tailwind CSS + .dv-home scoped styling
 │   ├── icon.png                             # App favicon asset
-│   ├── layout.tsx                           # Root layout, next/font, GA4, Jotform, Toaster
+│   ├── layout.tsx                           # Root layout, next/font, GA4, Toaster
 │   ├── not-found.tsx                        # Native HTTP 404 page
 │   ├── robots.ts                            # App-generated /robots.txt
 │   └── sitemap.ts                           # App-generated /sitemap.xml

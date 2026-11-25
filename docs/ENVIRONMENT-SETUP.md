@@ -8,7 +8,6 @@ All documented configuration variables live in `.env.example` (no secrets commit
 | --- | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Yes (Prod) | `https://www.dievekter.com` | Sets `metadataBase`, canonical URLs, JSON-LD `@id` URLs, `robots.txt` sitemap URL, and `sitemap.xml` hosts |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Recommended | `G-XLDPHSXXCS` | Enables GA4 tag loading & route-change tracking inside `RootLayout` and `AnalyticsRouteTracker` |
-| `NEXT_PUBLIC_JOTFORM_AGENT_ID` | Optional | Project default ID | Loads the interactive Jotform AI agent script via `next/script` (`lazyOnload`) |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Optional | Unset | Emits `<meta name="google-site-verification">` if configuring DNS-free verification |
 | `NEXT_PUBLIC_BING_VERIFICATION` | Optional | Unset | Emits `<meta name="msvalidate.01">` for Bing Webmaster Tools |
 

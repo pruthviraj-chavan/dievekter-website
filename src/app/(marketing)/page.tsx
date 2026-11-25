@@ -12,6 +12,7 @@ import { Process } from "@/components/home2/Process";
 import { TechStack } from "@/components/home2/TechStack";
 import { AIVideoService } from "@/components/home2/AIVideoService";
 import { CredentialsSection } from "@/components/home2/CredentialsSection";
+import { LocationsSection } from "@/components/home2/LocationsSection";
 import { FaqSection, HOME_FAQS } from "@/components/home2/FaqSection";
 import { CtaBand } from "@/components/home2/CtaBand";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -60,6 +61,7 @@ export default function HomePage() {
         <TechStack />
         <AIVideoService />
         <CredentialsSection />
+        <LocationsSection tone="peach" />
         <FaqSection />
         <CtaBand />
       </main>

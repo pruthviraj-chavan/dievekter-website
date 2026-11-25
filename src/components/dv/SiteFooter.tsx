@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { FOOTER_COLUMNS, SOCIAL_LINKS } from "@/config/navigation";
-import { SITE_CONFIG } from "@/config/site";
+import { FOOTER_COLUMNS, FOOTER_LEGAL_LINKS, SOCIAL_LINKS } from "@/config/navigation";
+import { OFFICE_LOCATIONS, SITE_CONFIG } from "@/config/site";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import {
   FooterCopyrightMark,
   WaveFooterBackgroundGlow,
   WaveFooterRibbon,
 } from "@/components/dv/WaveFooterBand";
+import { CookiePreferencesTrigger } from "@/components/layout/CookiePreferencesModal";
 
 export function SiteFooter() {
   const year = 2026;
@@ -75,9 +76,7 @@ export function SiteFooter() {
             <span aria-hidden="true" className="hidden sm:inline">
               ·
             </span>
-            <span>
-              {SITE_CONFIG.city}, {SITE_CONFIG.district}, {SITE_CONFIG.region}, India
-            </span>
+            <span>Radhanagari (HQ) · Kolhapur · Phondaghat, Maharashtra</span>
             <span aria-hidden="true" className="hidden sm:inline">
               ·
             </span>
@@ -110,16 +109,44 @@ export function SiteFooter() {
             ))}
           </nav>
 
+          {/* Office Addresses Compact Summary */}
+          <div className="mt-8 border-t border-white/10 pt-6 grid gap-4 md:grid-cols-3 text-[11px] text-stone-400">
+            {OFFICE_LOCATIONS.map((loc) => (
+              <div key={loc.id} className="rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3">
+                <p className="font-semibold text-white">
+                  <span className="text-[#FF5422]">{loc.badge}:</span> {loc.city}
+                </p>
+                <p className="mt-1 leading-relaxed text-stone-400">{loc.address}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Legal & Privacy Governance Strip */}
+          <div className="mt-6 border-t border-white/10 pt-5 flex flex-wrap items-center justify-center md:justify-between gap-x-5 gap-y-2.5 text-xs">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+              {FOOTER_LEGAL_LINKS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-stone-300 hover:text-white transition-colors"
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <CookiePreferencesTrigger />
+            </div>
+            <span className="text-stone-400 text-[11px]">
+              Technology Solutions &amp; Study Abroad Consultancy
+            </span>
+          </div>
+
           {/* Bottom bar */}
-          <div className="mt-8 border-t border-white/10 pt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs text-stone-400">
-            <p className="text-center md:text-left">
+          <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-[11px] text-stone-400">
+            <p className="text-center sm:text-left">
               © {year} {SITE_CONFIG.legalName} ({SITE_CONFIG.brandName}). All rights reserved.
             </p>
-            <p className="text-stone-400 text-center">
-              Serving Kolhapur · Pune · Maharashtra · India &amp; Global Clients
-            </p>
-            <p className="text-stone-400 text-center md:text-right">
-              Technology Solutions &amp; Study Abroad Consultancy
+            <p className="text-center sm:text-right">
+              Serving Radhanagari · Kolhapur · Phondaghat · Pune · India &amp; Global Clients
             </p>
           </div>
         </div>

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Code, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Building2, Code, Mail, MapPin, Phone, Send } from "lucide-react";
 import { SiteNav } from "@/components/dv/SiteNav";
 import { SiteFooter } from "@/components/dv/SiteFooter";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { ContactEnquiryForm } from "@/components/forms/ContactEnquiryForm";
+import { LocationsSection } from "@/components/home2/LocationsSection";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { SITE_CONFIG } from "@/config/site";
+import { OFFICE_LOCATIONS, SITE_CONFIG } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import {
   buildBreadcrumbSchema,
@@ -15,7 +16,7 @@ import {
 
 const TITLE = "Contact dieVekter | Software Development & Study Abroad Consultation";
 const DESC =
-  "Contact DieVekter Tech in Radhanagari, Kolhapur, Maharashtra via WhatsApp (+91 94048 95667), phone or email (team.dievekter@gmail.com) for software or study abroad enquiries.";
+  "Contact DieVekter Tech at our Head Office in Radhanagari or branches in Kolhapur (Rajarampuri) & Phondaghat via WhatsApp (+91 94048 95667), phone or email.";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/contact",
@@ -28,7 +29,12 @@ export default function ContactPage() {
     <div className="flex min-h-screen flex-col overflow-x-hidden bg-white text-[#141210]">
       <JsonLd
         nodes={[
-          buildWebPageSchema({ title: TITLE, description: DESC, path: "/contact" }),
+          buildWebPageSchema({
+            title: TITLE,
+            description: DESC,
+            path: "/contact",
+            pageType: "ContactPage",
+          }),
           buildBreadcrumbSchema([
             { name: "Home", path: "/" },
             { name: "Contact", path: "/contact" },
@@ -51,9 +57,9 @@ export default function ContactPage() {
               Let&apos;s build or plan <span className="text-[#FF5422]">together.</span>
             </h1>
             <p className="text-base sm:text-lg text-stone-600 leading-relaxed">
-              Reach DieVekter Tech in {SITE_CONFIG.city}, {SITE_CONFIG.district},{" "}
-              {SITE_CONFIG.region} for custom software, AI agents &amp; web engineering or Study
-              Abroad Consultancy across India and globally.
+              Reach DieVekter Tech at our Radhanagari Head Office or our Kolhapur (Rajarampuri) and
+              Phondaghat branches for custom software, AI agents &amp; web engineering or Study Abroad
+              Consultancy.
             </p>
           </div>
         </section>
@@ -64,8 +70,8 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-3xl font-bold text-[#141210] mb-4">Direct Contact Channels</h2>
                 <p className="text-stone-600 leading-relaxed mb-8">
-                  Reach us directly by WhatsApp, phone or email — serving businesses and students in
-                  Kolhapur, Pune, Maharashtra and globally.
+                  Reach us directly by WhatsApp, phone, email, or visit one of our offices across
+                  Radhanagari, Kolhapur, and Phondaghat.
                 </p>
 
                 <div className="space-y-4">
@@ -138,18 +144,32 @@ export default function ContactPage() {
 
                   <div className="flex items-start gap-4 rounded-2xl border border-[#FBE0D4] bg-white p-5 shadow-sm">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FF5422] text-white">
-                      <MapPin className="h-5 w-5" />
+                      <Building2 className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-[#141210]">
-                        Registered Location &amp; Service Coverage
-                      </h3>
+                      <h3 className="text-base font-bold text-[#141210]">Head Office</h3>
                       <p className="text-sm text-stone-600 leading-relaxed">
-                        {SITE_CONFIG.legalName} · {SITE_CONFIG.city}, {SITE_CONFIG.district},{" "}
-                        {SITE_CONFIG.region}, India (Udyam: {SITE_CONFIG.udyam} · D-U-N-S:{" "}
-                        {SITE_CONFIG.duns}) · Serving Kolhapur, Pune, India &amp; Global Remote
-                        Clients
+                        {OFFICE_LOCATIONS[0].address}
                       </p>
+                      <p className="text-[11px] font-mono text-stone-500 mt-1">
+                        {SITE_CONFIG.legalName} · Udyam: {SITE_CONFIG.udyam} · D-U-N-S:{" "}
+                        {SITE_CONFIG.duns}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 rounded-2xl border border-[#FBE0D4] bg-white p-5 shadow-sm">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#141210] text-[#FF5422]">
+                      <MapPin className="h-5 w-5" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-base font-bold text-[#141210]">Regional Branches</h3>
+                      {OFFICE_LOCATIONS.slice(1).map((branch) => (
+                        <div key={branch.id} className="text-xs text-stone-600 leading-relaxed">
+                          <span className="font-semibold text-[#141210]">{branch.city}: </span>
+                          {branch.address}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -159,6 +179,8 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+
+        <LocationsSection tone="light" id="office-maps" />
       </main>
       <SiteFooter />
     </div>
