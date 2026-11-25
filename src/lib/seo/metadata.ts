@@ -31,7 +31,11 @@ export function buildPageMetadata({
   absoluteTitle = false,
 }: PageMetadataInput): Metadata {
   const canonicalUrl = toAbsoluteUrl(path);
-  const ogImage = image || SITE_CONFIG.defaultOgImage;
+  const ogImage = image
+    ? image.startsWith("http")
+      ? image
+      : toAbsoluteUrl(image)
+    : SITE_CONFIG.defaultOgImage;
   const resolvedAlt = imageAlt || title;
 
   const isPreviewEnv =

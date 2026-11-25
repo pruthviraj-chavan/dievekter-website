@@ -77,6 +77,9 @@ async function main() {
       { path: "/blog", noindex: false },
       { path: "/blog/study-in-germany", noindex: false },
       { path: "/blog/study-in-germany-complete-guide-indian-students", noindex: false },
+      { path: "/blog/aps-certificate-india-checklist-documents-timeline-germany", noindex: false },
+      { path: "/blog/agentic-ai-vs-standard-chatbots-production-workflows-india", noindex: false },
+      { path: "/blog/vite-react-spa-vs-nextjs-app-router-seo-core-web-vitals", noindex: false },
       { path: "/contact", noindex: false },
       { path: "/jobs", noindex: false },
       { path: "/internship", noindex: false },
@@ -170,6 +173,8 @@ async function main() {
       ["/privacy-policy", "/privacy"],
       ["/terms-and-conditions", "/terms"],
       ["/blog/category/study-in-germany", "/blog/study-in-germany"],
+      ["/blog/seo-optimization-strategies-small-business-google-ranking", "/blog/technical-seo-local-search-blueprint-kolhapur-pune-maharashtra"],
+      ["/blog/agentic-ai-revolution-autonomous-agents-business", "/blog/agentic-ai-vs-standard-chatbots-production-workflows-india"],
     ];
     for (const [src, dest] of redirectPairs) {
       const { status, headers } = await requestRaw(src);
@@ -190,6 +195,14 @@ async function main() {
     check(
       sitemapRes.body.includes("https://www.dievekter.com/study-abroad/germany"),
       "sitemap.xml missing /study-abroad/germany",
+    );
+    check(
+      sitemapRes.body.includes("https://www.dievekter.com/blog/aps-certificate-india-checklist-documents-timeline-germany"),
+      "sitemap.xml missing new APS guide",
+    );
+    check(
+      !sitemapRes.body.includes("slack-data-migration-enterprise-workspace-transfer-guide"),
+      "sitemap.xml leaked removed outdated Slack blog",
     );
     check(!sitemapRes.body.includes("/fun"), "sitemap.xml leaked /fun");
     check(!sitemapRes.body.includes("/services/refer"), "sitemap.xml leaked /services/refer");

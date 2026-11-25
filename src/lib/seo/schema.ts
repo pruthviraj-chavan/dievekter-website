@@ -260,7 +260,11 @@ export function buildBlogPostingSchema({
     "@type": "BlogPosting",
     headline: title,
     description,
-    image: image || SITE_CONFIG.defaultOgImage,
+    image: image
+      ? image.startsWith("http")
+        ? image
+        : toAbsoluteUrl(image)
+      : SITE_CONFIG.defaultOgImage,
     url,
     mainEntityOfPage: {
       "@type": "WebPage",

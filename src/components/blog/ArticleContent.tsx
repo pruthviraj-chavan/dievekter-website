@@ -17,7 +17,7 @@ function slugifyHeading(text: string): string {
 
 function renderInlineMarkdown(text: string): React.ReactNode[] {
   const tokens: React.ReactNode[] = [];
-  const regex = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g;
+  const regex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
@@ -31,6 +31,15 @@ function renderInlineMarkdown(text: string): React.ReactNode[] {
         <strong key={`${match.index}-b`} className="font-semibold text-[#141210]">
           {token.slice(2, -2)}
         </strong>,
+      );
+    } else if (token.startsWith("`") && token.endsWith("`")) {
+      tokens.push(
+        <code
+          key={`${match.index}-c`}
+          className="rounded-md bg-[#FFF4F0] px-1.5 py-0.5 font-mono text-[0.88em] text-[#C83B12] border border-[#FBE0D4]"
+        >
+          {token.slice(1, -1)}
+        </code>,
       );
     } else {
       const linkMatch = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
@@ -99,6 +108,15 @@ export function extractArticleHeadings(markdown: string, articleTitle?: string):
   return headings;
 }
 
+function parseTableRow(line: string): string[] {
+  return line
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim());
+}
+
 export function ArticleContent({
   content,
   articleTitle,
@@ -112,8 +130,11 @@ export function ArticleContent({
   const cleanTitle = (articleTitle || "").trim().toLowerCase();
 
   let listItems: string[] = [];
+  let orderedItems: string[] = [];
+  let quoteLines: string[] = [];
+  let tableRows: string[] = [];
 
-  const flushList = (keyPrefix: string) => {
+  const flushUnordered = (keyPrefix: string) => {
     if (listItems.length === 0) return;
     blocks.push(
       <ul key={`${keyPrefix}-ul`} className="my-4 list-disc space-y-2 pl-6 text-stone-700">
@@ -127,6 +148,87 @@ export function ArticleContent({
     listItems = [];
   };
 
+  const flushOrdered = (keyPrefix: string) => {
+    if (orderedItems.length === 0) return;
+    blocks.push(
+      <ol key={`${keyPrefix}-ol`} className="my-4 list-decimal space-y-2 pl-6 text-stone-700">
+        {orderedItems.map((item, idx) => (
+          <li key={idx} className="leading-relaxed">
+            {renderInlineMarkdown(item)}
+          </li>
+        ))}
+      </ol>,
+    );
+    orderedItems = [];
+  };
+
+  const flushQuote = (keyPrefix: string) => {
+    if (quoteLines.length === 0) return;
+    blocks.push(
+      <blockquote
+        key={`${keyPrefix}-bq`}
+        className="my-6 rounded-r-2xl border-l-4 border-[#FF5422] bg-[#FFF8F5] px-5 py-4 text-sm sm:text-[15px] leading-relaxed text-[#141210]"
+      >
+        {quoteLines.map((q, idx) => (
+          <p key={idx} className={idx > 0 ? "mt-2" : ""}>
+            {renderInlineMarkdown(q)}
+          </p>
+        ))}
+      </blockquote>,
+    );
+    quoteLines = [];
+  };
+
+  const flushTable = (keyPrefix: string) => {
+    if (tableRows.length === 0) return;
+    const parsed = tableRows.map(parseTableRow);
+    const hasSeparator =
+      parsed.length >= 2 && parsed[1].every((cell) => /^:?-{2,}:?$/.test(cell));
+    const header = parsed[0] || [];
+    const bodyRows = hasSeparator ? parsed.slice(2) : parsed.slice(1);
+
+    blocks.push(
+      <div
+        key={`${keyPrefix}-tbl`}
+        className="my-6 overflow-x-auto rounded-2xl border border-stone-200 bg-white shadow-xs"
+      >
+        <table className="w-full min-w-[520px] border-collapse text-left text-sm">
+          <thead>
+            <tr className="border-b border-stone-200 bg-[#FFF8F5]">
+              {header.map((cell, idx) => (
+                <th
+                  key={idx}
+                  className="px-4 py-3 text-xs font-bold uppercase tracking-wider text-[#141210]"
+                >
+                  {renderInlineMarkdown(cell)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-stone-100">
+            {bodyRows.map((row, rIdx) => (
+              <tr key={rIdx} className="hover:bg-stone-50/70">
+                {row.map((cell, cIdx) => (
+                  <td key={cIdx} className="px-4 py-3 align-top leading-relaxed text-stone-700">
+                    {renderInlineMarkdown(cell)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>,
+    );
+    tableRows = [];
+  };
+
+  const flushAll = (keyPrefix: string) => {
+    flushUnordered(keyPrefix);
+    flushOrdered(keyPrefix);
+    flushQuote(keyPrefix);
+    flushTable(keyPrefix);
+  };
+
   const makeHeadingId = (text: string) => {
     const base = slugifyHeading(text) || "section";
     const count = seenIds.get(base) || 0;
@@ -137,13 +239,13 @@ export function ArticleContent({
   lines.forEach((raw, idx) => {
     const line = raw.trim();
     if (!line) {
-      flushList(`empty-${idx}`);
+      flushAll(`empty-${idx}`);
       return;
     }
 
     const h2 = line.match(/^##\s+(.+)$/);
     if (h2) {
-      flushList(`h2-${idx}`);
+      flushAll(`h2-${idx}`);
       const text = h2[1].trim();
       if (cleanTitle && text.toLowerCase() === cleanTitle) return;
       const id = makeHeadingId(text);
@@ -161,7 +263,7 @@ export function ArticleContent({
 
     const h3 = line.match(/^###\s+(.+)$/);
     if (h3) {
-      flushList(`h3-${idx}`);
+      flushAll(`h3-${idx}`);
       const text = h3[1].trim();
       const id = makeHeadingId(text);
       blocks.push(
@@ -176,13 +278,42 @@ export function ArticleContent({
       return;
     }
 
+    if (line.startsWith("|") && line.endsWith("|")) {
+      flushUnordered(`tbl-${idx}`);
+      flushOrdered(`tbl-${idx}`);
+      flushQuote(`tbl-${idx}`);
+      tableRows.push(line);
+      return;
+    }
+
+    const quoteMatch = line.match(/^>\s*(.+)$/);
+    if (quoteMatch) {
+      flushUnordered(`bq-${idx}`);
+      flushOrdered(`bq-${idx}`);
+      flushTable(`bq-${idx}`);
+      quoteLines.push(quoteMatch[1].trim());
+      return;
+    }
+
     const bullet = line.match(/^[-*]\s+(.+)$/);
     if (bullet) {
+      flushOrdered(`ul-${idx}`);
+      flushQuote(`ul-${idx}`);
+      flushTable(`ul-${idx}`);
       listItems.push(bullet[1].trim());
       return;
     }
 
-    flushList(`p-${idx}`);
+    const ordered = line.match(/^\d+\.\s+(.+)$/);
+    if (ordered) {
+      flushUnordered(`ol-${idx}`);
+      flushQuote(`ol-${idx}`);
+      flushTable(`ol-${idx}`);
+      orderedItems.push(ordered[1].trim());
+      return;
+    }
+
+    flushAll(`p-${idx}`);
     blocks.push(
       <p key={`p-${idx}`} className="my-3.5 text-base leading-relaxed text-stone-700">
         {renderInlineMarkdown(line)}
@@ -190,7 +321,7 @@ export function ArticleContent({
     );
   });
 
-  flushList("end");
+  flushAll("end");
 
   return <div className="space-y-1">{blocks}</div>;
 }

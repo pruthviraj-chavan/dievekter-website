@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: toAbsoluteUrl("/ai-agents-library"), lastModified: coreStableDate },
     { url: toAbsoluteUrl("/development-kit"), lastModified: coreStableDate },
     { url: toAbsoluteUrl("/contact"), lastModified: freshUpdateDate },
-    { url: toAbsoluteUrl("/blog"), lastModified: coreStableDate },
+    { url: toAbsoluteUrl("/blog"), lastModified: freshUpdateDate },
     { url: toAbsoluteUrl("/jobs"), lastModified: coreStableDate },
     { url: toAbsoluteUrl("/internship"), lastModified: coreStableDate },
     { url: toAbsoluteUrl("/privacy"), lastModified: freshUpdateDate },
