@@ -53,7 +53,7 @@ export function HashGeneratorTool() {
             <div key={i} className="bg-[hsl(230,25%,8%)] border border-[hsl(230,20%,20%)] rounded-lg p-3">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-semibold text-[hsl(250,60%,70%)]">{r.algo}</span>
-                <Button size="icon" variant="ghost" onClick={() => copy(r.hash, i)} className="h-6 w-6 text-[hsl(0,0%,60%)] hover:text-white">
+                <Button size="icon" variant="ghost" onClick={() => copy(r.hash, i)} aria-label={`Copy ${r.algo} hash`} className="h-6 w-6 text-[hsl(0,0%,60%)] hover:text-white">
                   {copiedIdx === i ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                 </Button>
               </div>

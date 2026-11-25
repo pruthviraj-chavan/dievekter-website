@@ -96,7 +96,7 @@ export default function StudyInGermanyPage() {
       />
       <SiteNav />
 
-      <main className="flex-grow pt-24">
+      <main id="main-content" tabIndex={-1} className="flex-grow pt-24 focus:outline-none">
         <section className="dv-dot-bg relative overflow-hidden py-14 sm:py-20">
           <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-5xl text-center">
             <nav aria-label="Breadcrumb" className="mb-6 flex justify-center">

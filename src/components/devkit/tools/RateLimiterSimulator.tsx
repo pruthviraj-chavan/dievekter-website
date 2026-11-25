@@ -70,7 +70,7 @@ export function RateLimiterSimulator() {
           {running ? <><Pause className="h-4 w-4 mr-1" />Stop Flood</> : <><Play className="h-4 w-4 mr-1" />Start Flood</>}
         </Button>
         <Button onClick={makeRequest} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,80%)] hover:bg-[hsl(230,20%,15%)]">Send One</Button>
-        <Button onClick={reset} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       {/* Token Bucket Visual */}

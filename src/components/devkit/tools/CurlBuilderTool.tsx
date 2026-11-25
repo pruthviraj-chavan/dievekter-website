@@ -59,7 +59,7 @@ export function CurlBuilderTool() {
               className="flex-1 bg-[hsl(230,25%,8%)] border-[hsl(230,20%,20%)] text-[hsl(0,0%,90%)] font-mono text-xs h-8" />
             <Input placeholder="Value" value={h.value} onChange={(e) => updateHeader(i, "value", e.target.value)}
               className="flex-1 bg-[hsl(230,25%,8%)] border-[hsl(230,20%,20%)] text-[hsl(0,0%,90%)] font-mono text-xs h-8" />
-            <Button size="icon" variant="ghost" onClick={() => removeHeader(i)} className="h-8 w-8 text-[hsl(0,0%,40%)] hover:text-[hsl(0,60%,60%)]"><Trash2 className="h-3 w-3" /></Button>
+            <Button size="icon" variant="ghost" onClick={() => removeHeader(i)} aria-label="Remove header" className="h-8 w-8 text-[hsl(0,0%,40%)] hover:text-[hsl(0,60%,60%)]"><Trash2 className="h-3 w-3" /></Button>
           </div>
         ))}
       </div>
@@ -70,7 +70,7 @@ export function CurlBuilderTool() {
       {url && (
         <div className="relative">
           <pre className="bg-[hsl(230,25%,8%)] border border-[hsl(230,20%,20%)] rounded-lg p-4 text-sm text-[hsl(30,70%,70%)] font-mono overflow-x-auto">{buildCurl()}</pre>
-          <Button size="icon" variant="ghost" onClick={copy} className="absolute top-2 right-2 text-[hsl(0,0%,60%)] hover:text-white">
+          <Button size="icon" variant="ghost" onClick={copy} aria-label="Copy cURL command" className="absolute top-2 right-2 text-[hsl(0,0%,60%)] hover:text-white">
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
           </Button>
         </div>

@@ -85,7 +85,7 @@ export function GarbageCollectorVisualizer() {
         <Button onClick={addObject} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)] text-xs">
           <Plus className="h-3 w-3 mr-1" /> Add Object
         </Button>
-        <Button onClick={reset} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]">
+        <Button onClick={reset} variant="outline" size="sm" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]">
           <RotateCcw className="h-4 w-4" />
         </Button>
       </div>

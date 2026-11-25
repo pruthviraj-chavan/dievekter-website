@@ -49,7 +49,7 @@ export default function HomePage() {
         ]}
       />
       <SiteNav />
-      <main className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow focus:outline-none">
         <Hero />
         <AboutStudio />
         <Capabilities />

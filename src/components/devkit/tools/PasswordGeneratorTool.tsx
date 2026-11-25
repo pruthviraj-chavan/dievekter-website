@@ -39,10 +39,10 @@ export function PasswordGeneratorTool() {
     <div className="space-y-5">
       <div className="bg-[hsl(230,25%,8%)] border border-[hsl(230,20%,20%)] rounded-lg p-4 flex items-center gap-3">
         <code className="flex-1 text-lg font-mono text-[hsl(140,60%,70%)] break-all">{password}</code>
-        <Button size="icon" variant="ghost" onClick={copy} className="text-[hsl(0,0%,60%)] hover:text-white shrink-0">
+        <Button size="icon" variant="ghost" onClick={copy} aria-label="Copy generated password" className="text-[hsl(0,0%,60%)] hover:text-white shrink-0">
           {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
         </Button>
-        <Button size="icon" variant="ghost" onClick={regen} className="text-[hsl(0,0%,60%)] hover:text-white shrink-0">
+        <Button size="icon" variant="ghost" onClick={regen} aria-label="Generate new password" className="text-[hsl(0,0%,60%)] hover:text-white shrink-0">
           <RefreshCw className="h-4 w-4" />
         </Button>
       </div>

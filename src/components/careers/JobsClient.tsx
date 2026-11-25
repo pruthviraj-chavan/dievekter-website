@@ -235,7 +235,7 @@ export function JobsClient() {
   };
 
   return (
-    <main className="flex-grow pt-24">
+    <main id="main-content" tabIndex={-1} className="flex-grow pt-24 focus:outline-none">
       <section className="dv-dot-bg py-16 sm:py-24">
         <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-4xl text-center">
           <span className="inline-block rounded-full bg-[#FF5422] px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white mb-5">

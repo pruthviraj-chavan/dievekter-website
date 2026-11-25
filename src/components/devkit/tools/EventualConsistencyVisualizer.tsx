@@ -94,7 +94,7 @@ export function EventualConsistencyVisualizer() {
         <Button onClick={write} className="bg-[hsl(140,50%,35%)] hover:bg-[hsl(140,50%,30%)] text-white text-xs">Write Value</Button>
         <Button onClick={read} className="bg-[hsl(200,50%,40%)] hover:bg-[hsl(200,50%,35%)] text-white text-xs">Read Value</Button>
         <Button onClick={() => { setReplicas(Array.from({ length: N }, (_, i) => ({ id: i, value: 0, version: 0, synced: true }))); setLog([]); versionRef.current = 0; }}
-          variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+          variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       {log.length > 0 && (

@@ -66,7 +66,7 @@ export default function StudyAbroadPage() {
       />
       <SiteNav />
 
-      <main className="dv-dot-bg flex-grow pt-24">
+      <main id="main-content" tabIndex={-1} className="dv-dot-bg flex-grow pt-24 focus:outline-none">
         <section className="relative overflow-hidden py-12 sm:py-16">
           <div
             aria-hidden="true"

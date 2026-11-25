@@ -83,7 +83,7 @@ export function MessageQueueSimulator() {
         <Button onClick={() => setRunning(!running)} className="bg-[hsl(250,50%,45%)] hover:bg-[hsl(250,50%,40%)] text-white text-xs">
           {running ? <><Pause className="h-3 w-3 mr-1" />Pause</> : <><Play className="h-3 w-3 mr-1" />Start</>}
         </Button>
-        <Button onClick={() => { setMessages([]); idRef.current = 0; setRunning(false); }} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]">
+        <Button onClick={() => { setMessages([]); idRef.current = 0; setRunning(false); }} variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]">
           <RotateCcw className="h-4 w-4" />
         </Button>
       </div>

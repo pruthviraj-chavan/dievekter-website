@@ -83,7 +83,7 @@ export function YamlJsonTool() {
       {output && (
         <div className="relative">
           <pre className="bg-[hsl(230,25%,8%)] border border-[hsl(230,20%,20%)] rounded-lg p-4 text-sm text-[hsl(50,60%,70%)] font-mono overflow-x-auto max-h-[300px]">{output}</pre>
-          <Button size="icon" variant="ghost" onClick={copy} className="absolute top-2 right-2 text-[hsl(0,0%,60%)] hover:text-white">
+          <Button size="icon" variant="ghost" onClick={copy} aria-label="Copy converted output" className="absolute top-2 right-2 text-[hsl(0,0%,60%)] hover:text-white">
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
           </Button>
         </div>

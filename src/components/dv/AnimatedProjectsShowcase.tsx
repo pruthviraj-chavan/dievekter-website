@@ -268,7 +268,7 @@ function ProjectCard3D({
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative z-10 block focus:outline-none"
+          className="relative z-10 block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5422] focus-visible:ring-inset rounded-t-2xl"
           aria-label={`Open ${project.title} website`}
         >
           <ProjectBrowserPreview project={project} reduceMotion={reduceMotion} />

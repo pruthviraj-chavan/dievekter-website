@@ -70,7 +70,7 @@ export function MicroservicesFailureSimulator() {
           <Switch checked={circuitBreaker} onCheckedChange={setCircuitBreaker} />
           <span className="text-xs text-[hsl(0,0%,60%)]">Circuit Breaker</span>
         </div>
-        <Button onClick={reset} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" size="sm" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       <div className="bg-[hsl(230,25%,8%)] border border-[hsl(230,20%,20%)] rounded-lg p-4">

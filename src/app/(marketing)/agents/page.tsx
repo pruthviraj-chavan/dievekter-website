@@ -256,7 +256,7 @@ export default function AgentsPage() {
         ]}
       />
       <SiteNav />
-      <main className="flex-grow pt-24">
+      <main id="main-content" tabIndex={-1} className="flex-grow pt-24 focus:outline-none">
         <section className="dv-dot-bg relative overflow-hidden py-16 sm:py-24">
           <div
             aria-hidden="true"

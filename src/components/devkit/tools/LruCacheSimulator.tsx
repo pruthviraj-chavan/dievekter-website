@@ -64,7 +64,7 @@ export function LruCacheSimulator() {
           className="flex-1 bg-[hsl(230,25%,8%)] border-[hsl(230,20%,20%)] text-[hsl(0,0%,90%)] font-mono text-sm"
           onKeyDown={(e) => e.key === "Enter" && access()} />
         <Button onClick={access} className="bg-[hsl(250,80%,60%)] hover:bg-[hsl(250,80%,50%)] text-white"><Play className="h-4 w-4" /></Button>
-        <Button onClick={reset} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       {/* Visual Cache */}

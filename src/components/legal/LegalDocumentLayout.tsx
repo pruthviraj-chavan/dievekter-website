@@ -47,7 +47,7 @@ export function LegalDocumentLayout({
       />
       <SiteNav />
 
-      <main className="flex-grow pt-24 sm:pt-28 pb-20">
+      <main id="main-content" tabIndex={-1} className="flex-grow pt-24 sm:pt-28 pb-20 focus:outline-none">
         {/* Hero */}
         <section className="dv-dot-bg py-12 sm:py-16 border-b border-stone-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl">

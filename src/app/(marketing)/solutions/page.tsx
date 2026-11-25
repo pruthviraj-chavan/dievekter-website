@@ -54,7 +54,7 @@ export default function SolutionsPage() {
         ]}
       />
       <SiteNav />
-      <main className="flex-grow">
+      <main id="main-content" tabIndex={-1} className="flex-grow focus:outline-none">
         <section className="dv-dot-bg relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-20">
           <div
             aria-hidden="true"

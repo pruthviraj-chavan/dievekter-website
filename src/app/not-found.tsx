@@ -16,7 +16,7 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col bg-white text-[#141210]">
       <SiteNav />
-      <main className="dv-dot-bg flex-grow flex items-center justify-center pt-24 pb-20">
+      <main id="main-content" tabIndex={-1} className="dv-dot-bg flex-grow flex items-center justify-center pt-24 pb-20 focus:outline-none">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-8xl sm:text-9xl font-black text-[#FF5422] mb-4">404</h1>
           <h2 className="text-3xl font-bold mb-4 text-[#141210]">Page Not Found</h2>

@@ -60,7 +60,7 @@ export function DnsResolutionVisualizer() {
           {step < 0 ? "Start Resolution" : step < steps.length - 1 ? "Next Hop" : "Complete ✓"}
         </Button>
         <Button onClick={() => setStep(steps.length - 1)} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)] text-xs">Show All</Button>
-        <Button onClick={() => setStep(-1)} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={() => setStep(-1)} variant="outline" size="sm" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
     </div>
   );

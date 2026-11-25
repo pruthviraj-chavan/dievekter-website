@@ -51,7 +51,7 @@ export function Base64Tool() {
       {output && (
         <div className="relative">
           <pre className="bg-[hsl(230,25%,8%)] border border-[hsl(230,20%,20%)] rounded-lg p-4 text-sm text-[hsl(170,60%,70%)] font-mono break-all whitespace-pre-wrap">{output}</pre>
-          <Button size="icon" variant="ghost" onClick={copy} className="absolute top-2 right-2 text-[hsl(0,0%,60%)] hover:text-white">
+          <Button size="icon" variant="ghost" onClick={copy} aria-label="Copy Base64 output" className="absolute top-2 right-2 text-[hsl(0,0%,60%)] hover:text-white">
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
           </Button>
         </div>

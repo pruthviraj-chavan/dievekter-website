@@ -69,7 +69,7 @@ export function BlogArchiveClient({
   }, [categoryPosts, searchTerm, selectedTag]);
 
   return (
-    <main className="dv-dot-bg flex-grow pt-24 sm:pt-28 pb-20 sm:pb-24">
+    <main id="main-content" tabIndex={-1} className="dv-dot-bg flex-grow pt-24 sm:pt-28 pb-20 sm:pb-24 focus:outline-none">
       <section className="relative pt-8 sm:pt-12 pb-6 sm:pb-8">
         <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl">
           <div className="relative mx-auto max-w-2xl">

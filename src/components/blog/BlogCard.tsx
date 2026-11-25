@@ -14,7 +14,7 @@ export const BlogCard = ({ post, index = 0 }: BlogCardProps) => {
   return (
     <MotionFadeIn delay={(index % 3) * 0.05} hoverLift>
       <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-[0_6px_24px_-12px_rgba(20,18,16,0.08)] transition-all duration-300 hover:border-[#FF5422]/45 hover:shadow-[0_22px_44px_-18px_rgba(255,84,34,0.2)]">
-        <Link href={`/blog/${post.slug}`} className="flex h-full flex-col focus:outline-none">
+        <Link href={`/blog/${post.slug}`} className="flex h-full flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5422] focus-visible:ring-inset">
           <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#FFF4F0]">
             <Image
               src={post.coverImage}

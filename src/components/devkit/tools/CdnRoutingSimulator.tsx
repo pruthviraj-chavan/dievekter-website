@@ -81,7 +81,7 @@ export function CdnRoutingSimulator() {
       <div className="flex gap-2 flex-wrap">
         <Button onClick={request} className="bg-[hsl(250,50%,45%)] hover:bg-[hsl(250,50%,40%)] text-white text-xs">Send Request</Button>
         <Button onClick={expireTtl} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(40,80%,55%)] text-xs">Expire All TTLs</Button>
-        <Button onClick={reset} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" size="sm" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       {log.length > 0 && (

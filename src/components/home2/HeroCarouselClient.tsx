@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useReducedMotion } from "framer-motion";
@@ -326,28 +327,34 @@ export function HeroCarouselClient() {
               >
                 {imgSrc ? (
                   <>
-                    <img
+                    <Image
                       ref={(el) => {
                         frontImgRefs.current[idx] = el;
                       }}
                       src={imgSrc}
                       alt={card.label}
+                      fill
+                      unoptimized
+                      sizes="(max-width: 640px) 200px, 320px"
                       draggable={false}
-                      className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_18px_32px_rgba(20,18,16,0.14)]"
+                      className="object-contain drop-shadow-[0_18px_32px_rgba(20,18,16,0.14)]"
                       style={{
                         backfaceVisibility: "hidden",
                         transform: "translateZ(0.5px)",
                       }}
                     />
-                    <img
+                    <Image
                       ref={(el) => {
                         backImgRefs.current[idx] = el;
                       }}
                       src={imgSrc}
                       alt=""
                       aria-hidden="true"
+                      fill
+                      unoptimized
+                      sizes="(max-width: 640px) 200px, 320px"
                       draggable={false}
-                      className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_14px_24px_rgba(20,18,16,0.11)]"
+                      className="object-contain drop-shadow-[0_14px_24px_rgba(20,18,16,0.11)]"
                       style={{
                         backfaceVisibility: "hidden",
                         transform: "rotateY(180deg) translateZ(0.5px)",
@@ -355,15 +362,15 @@ export function HeroCarouselClient() {
                     />
                   </>
                 ) : (
-                  <Link
-                    href={card.to}
+                  <div
+                    aria-hidden="true"
                     className="flex h-full w-full flex-col justify-between rounded-[22px] border border-[#FBE0D4] bg-[#FFF5F1] p-5 shadow-md"
                   >
                     <span className="inline-block w-fit rounded-full bg-[#FF5422] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                       dieVekter
                     </span>
                     <span className="text-base font-bold text-[#141210]">{card.label}</span>
-                  </Link>
+                  </div>
                 )}
               </div>
             );

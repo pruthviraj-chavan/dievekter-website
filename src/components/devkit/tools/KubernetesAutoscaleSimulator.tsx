@@ -32,15 +32,33 @@ export function KubernetesAutoscaleSimulator() {
     return () => clearInterval(intervalRef.current);
   }, [running, tick]);
 
+  const hpaStateRef = useRef({ pods, hpaThreshold, maxPods, minPods });
+
+  useEffect(() => {
+    hpaStateRef.current = { pods, hpaThreshold, maxPods, minPods };
+  }, [pods, hpaThreshold, maxPods, minPods]);
+
   // HPA logic
   useEffect(() => {
-    setHistory(h => [...h.slice(-30), { cpu: cpuLoad, pods }]);
-    if (cpuLoad > hpaThreshold && pods < maxPods) {
-      setPods(p => p + 1);
-      setLog(l => [`⬆ Scale UP: CPU ${cpuLoad.toFixed(0)}% > ${hpaThreshold}% → ${pods + 1} pods`, ...l.slice(0, 14)]);
-    } else if (cpuLoad < hpaThreshold * 0.5 && pods > minPods) {
-      setPods(p => p - 1);
-      setLog(l => [`⬇ Scale DOWN: CPU ${cpuLoad.toFixed(0)}% < ${(hpaThreshold * 0.5).toFixed(0)}% → ${pods - 1} pods`, ...l.slice(0, 14)]);
+    const {
+      pods: currentPods,
+      hpaThreshold: targetThreshold,
+      maxPods: maxPodLimit,
+      minPods: minPodLimit,
+    } = hpaStateRef.current;
+    setHistory((h) => [...h.slice(-30), { cpu: cpuLoad, pods: currentPods }]);
+    if (cpuLoad > targetThreshold && currentPods < maxPodLimit) {
+      setPods((p) => p + 1);
+      setLog((l) => [
+        `⬆ Scale UP: CPU ${cpuLoad.toFixed(0)}% > ${targetThreshold}% → ${currentPods + 1} pods`,
+        ...l.slice(0, 14),
+      ]);
+    } else if (cpuLoad < targetThreshold * 0.5 && currentPods > minPodLimit) {
+      setPods((p) => p - 1);
+      setLog((l) => [
+        `⬇ Scale DOWN: CPU ${cpuLoad.toFixed(0)}% < ${(targetThreshold * 0.5).toFixed(0)}% → ${currentPods - 1} pods`,
+        ...l.slice(0, 14),
+      ]);
     }
   }, [cpuLoad]);
 
@@ -92,7 +110,7 @@ export function KubernetesAutoscaleSimulator() {
           {running ? <><Pause className="h-3 w-3 mr-1" />Pause</> : <><Play className="h-3 w-3 mr-1" />Start</>}
         </Button>
         <Button onClick={spike} className="bg-[hsl(0,50%,40%)] hover:bg-[hsl(0,50%,35%)] text-white text-xs">🔥 Traffic Spike</Button>
-        <Button onClick={reset} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       {log.length > 0 && (

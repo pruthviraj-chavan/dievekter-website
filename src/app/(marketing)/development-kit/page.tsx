@@ -29,7 +29,9 @@ export default function DevelopmentKitPage() {
         ]}
       />
       <SiteNav />
-      <DevelopmentKitClient />
+      <main id="main-content" tabIndex={-1} className="flex-grow focus:outline-none">
+        <DevelopmentKitClient />
+      </main>
       <SiteFooter />
     </div>
   );

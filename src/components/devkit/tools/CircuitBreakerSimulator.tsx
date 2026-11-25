@@ -113,7 +113,7 @@ export function CircuitBreakerSimulator() {
       <div className="flex gap-2 flex-wrap">
         <Button onClick={sendSuccess} className="bg-[hsl(140,50%,35%)] hover:bg-[hsl(140,50%,30%)] text-white">✓ Success</Button>
         <Button onClick={sendFailure} className="bg-[hsl(0,50%,40%)] hover:bg-[hsl(0,50%,35%)] text-white">✗ Failure</Button>
-        <Button onClick={reset} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       {log.length > 0 && (

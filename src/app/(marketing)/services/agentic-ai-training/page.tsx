@@ -86,7 +86,7 @@ export default function AgenticAITrainingPage() {
       />
       <SiteNav />
 
-      <main className="flex-grow pt-24">
+      <main id="main-content" tabIndex={-1} className="flex-grow pt-24 focus:outline-none">
         <section className="dv-dot-bg py-16 sm:py-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

@@ -70,7 +70,7 @@ export function OAuthFlowSimulator() {
             ))}
           </SelectContent>
         </Select>
-        <Button onClick={() => setStep(-1)} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={() => setStep(-1)} variant="outline" size="sm" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
 
       <div className="flex gap-3 justify-center flex-wrap">

@@ -82,7 +82,7 @@ export function DatabaseIndexSimulator() {
           </SelectContent>
         </Select>
         <Button onClick={() => setIndexes([...indexes, { column: addCol, type: addType }])} size="sm" className="bg-[hsl(250,50%,45%)] text-white text-xs">Add Index</Button>
-        <Button onClick={() => setIndexes([{ column: "id", type: "btree" }])} variant="outline" size="sm" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-3 w-3" /></Button>
+        <Button onClick={() => setIndexes([{ column: "id", type: "btree" }])} variant="outline" size="sm" aria-label="Reset indexes" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-3 w-3" /></Button>
       </div>
 
       <div>

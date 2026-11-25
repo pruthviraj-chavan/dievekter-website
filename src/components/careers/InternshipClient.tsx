@@ -226,7 +226,7 @@ export function InternshipClient() {
   };
 
   return (
-    <main className="flex-grow pt-24">
+    <main id="main-content" tabIndex={-1} className="flex-grow pt-24 focus:outline-none">
       <section className="dv-dot-bg py-16 sm:py-24">
         <div className="container mx-auto px-5 sm:px-6 lg:px-8 text-center max-w-3xl">
           <span className="inline-block rounded-full bg-[#FF5422] px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white mb-5">
@@ -262,8 +262,7 @@ export function InternshipClient() {
               return (
                 <div
                   key={role.id}
-                  onClick={() => handleRoleSelect(role.id)}
-                  className={`rounded-2xl border p-6 transition-all cursor-pointer flex flex-col justify-between ${
+                  className={`relative rounded-2xl border p-6 transition-all flex flex-col justify-between ${
                     selected
                       ? "border-[#FF5422] bg-[#FFF4F0] shadow-md"
                       : "border-[#FBE0D4] bg-white hover:border-[#FF5422]/60"
@@ -296,9 +295,11 @@ export function InternshipClient() {
 
                   <Button
                     type="button"
+                    onClick={() => handleRoleSelect(role.id)}
+                    aria-pressed={selected}
                     variant={selected ? "default" : "outline"}
                     size="sm"
-                    className={`w-full rounded-full ${
+                    className={`w-full rounded-full after:absolute after:inset-0 after:rounded-2xl ${
                       selected
                         ? "bg-[#FF5422] text-white hover:bg-[#e8460e]"
                         : "border-stone-200 hover:border-[#FF5422] hover:text-[#FF5422]"

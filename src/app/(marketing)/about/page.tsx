@@ -63,7 +63,7 @@ export default function AboutPage() {
       />
       <SiteNav />
 
-      <main className="dv-dot-bg flex-grow pt-24 sm:pt-28">
+      <main id="main-content" tabIndex={-1} className="dv-dot-bg flex-grow pt-24 sm:pt-28 focus:outline-none">
         {/* 1. Editorial Hero */}
         <section className="relative pt-8 sm:pt-12 pb-4">
           <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl">

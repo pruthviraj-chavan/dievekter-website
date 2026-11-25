@@ -99,7 +99,7 @@ export function ThreadDeadlockVisualizer() {
         <Button onClick={detect} disabled={running || detected} className="bg-[hsl(250,50%,45%)] hover:bg-[hsl(250,50%,40%)] text-white text-xs">
           <Play className="h-3 w-3 mr-1" /> Detect Deadlock
         </Button>
-        <Button onClick={reset} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
       </div>
     </div>
   );

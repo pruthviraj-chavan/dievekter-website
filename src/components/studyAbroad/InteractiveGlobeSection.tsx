@@ -290,7 +290,7 @@ export function InteractiveGlobeSection({
                         onClick={() => setActiveId(dest.id)}
                         onMouseEnter={() => setActiveId(dest.id)}
                         aria-label={`Select destination ${dest.label}`}
-                        className="group absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none z-20"
+                        className="group absolute -translate-x-1/2 -translate-y-1/2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5422] focus-visible:ring-offset-2 z-20"
                         style={{ left: `${dest.x}%`, top: `${dest.y}%` }}
                       >
                         {/* Pulsing beacon halo */}

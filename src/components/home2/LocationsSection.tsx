@@ -144,18 +144,8 @@ export function LocationsSection({
                       key={office.id}
                       whileHover={reduceMotion ? undefined : { x: 4 }}
                       transition={{ type: "spring", stiffness: 300, damping: 26 }}
-                      onClick={() => setSelectedId(office.id)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setSelectedId(office.id);
-                        }
-                      }}
-                      role="button"
-                      tabIndex={0}
-                      aria-pressed={selected}
                       className={cn(
-                        "group relative cursor-pointer rounded-2xl border p-5 sm:p-6 transition-all duration-300",
+                        "group relative rounded-2xl border p-5 sm:p-6 transition-all duration-300",
                         selected
                           ? "border-[#FF5422] bg-white shadow-[0_22px_50px_-18px_rgba(255,84,34,0.28)]"
                           : "border-[#FBE0D4] bg-white/85 hover:bg-white hover:border-[#FF5422]/45 shadow-sm",
@@ -198,7 +188,15 @@ export function LocationsSection({
                               )}
                             </div>
                             <h3 className="text-base sm:text-lg font-bold text-[#141210]">
-                              {office.title}
+                              <button
+                                type="button"
+                                onClick={() => setSelectedId(office.id)}
+                                aria-pressed={selected}
+                                aria-expanded={selected}
+                                className="text-left focus:outline-none focus-visible:after:ring-2 focus-visible:after:ring-[#FF5422] after:absolute after:inset-0 after:rounded-2xl"
+                              >
+                                {office.title}
+                              </button>
                             </h3>
                           </div>
                         </div>
@@ -236,13 +234,10 @@ export function LocationsSection({
                               {office.hours}
                             </span>
 
-                            <div className="flex items-center gap-2">
+                            <div className="relative z-10 flex items-center gap-2">
                               <button
                                 type="button"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleCopyAddress(office.id, office.address);
-                                }}
+                                onClick={() => handleCopyAddress(office.id, office.address)}
                                 className="inline-flex items-center gap-1 rounded-full border border-stone-200 bg-white px-3 py-1 text-[11px] font-semibold text-stone-700 hover:border-[#FF5422] hover:text-[#FF5422] transition-colors"
                               >
                                 {copiedId === office.id ? (
@@ -257,7 +252,6 @@ export function LocationsSection({
                               </button>
                               <Link
                                 href={office.locationPath}
-                                onClick={(e) => e.stopPropagation()}
                                 className="inline-flex items-center gap-1 rounded-full border border-[#FBE0D4] bg-[#FFF5F1] px-3 py-1 text-[11px] font-semibold text-[#FF5422] hover:bg-[#FF5422] hover:text-white transition-colors"
                               >
                                 Office Guide <ArrowUpRight className="h-3 w-3" />
@@ -266,7 +260,6 @@ export function LocationsSection({
                                 href={office.directionsUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
                                 className="inline-flex items-center gap-1 rounded-full bg-[#141210] px-3 py-1 text-[11px] font-semibold text-white hover:bg-[#FF5422] transition-colors"
                               >
                                 <Navigation className="h-3 w-3" /> Directions

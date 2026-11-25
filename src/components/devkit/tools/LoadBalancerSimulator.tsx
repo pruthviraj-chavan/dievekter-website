@@ -18,6 +18,7 @@ export function LoadBalancerSimulator() {
   const [activeServer, setActiveServer] = useState<number | null>(null);
   const nextServerRef = useRef(0);
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
+  const flashTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const resetServers = useCallback((count: number) => {
     setServers(Array.from({ length: count }, (_, i) => ({ id: i, load: 0, requests: 0, color: COLORS[i % COLORS.length] })));
@@ -26,7 +27,9 @@ export function LoadBalancerSimulator() {
     setActiveServer(null);
   }, []);
 
-  useEffect(() => { resetServers(serverCount); }, [serverCount]);
+  useEffect(() => {
+    resetServers(serverCount);
+  }, [serverCount, resetServers]);
 
   const sendRequest = useCallback(() => {
     const idx = nextServerRef.current % serverCount;
@@ -34,8 +37,11 @@ export function LoadBalancerSimulator() {
     setActiveServer(idx);
     setTotalRequests((t) => t + 1);
     setServers((prev) => prev.map((s, i) => i === idx ? { ...s, load: Math.min(s.load + 15, 100), requests: s.requests + 1 } : { ...s, load: Math.max(s.load - 3, 0) }));
-    setTimeout(() => setActiveServer(null), 200);
+    clearTimeout(flashTimeoutRef.current);
+    flashTimeoutRef.current = setTimeout(() => setActiveServer(null), 200);
   }, [serverCount]);
+
+  useEffect(() => () => clearTimeout(flashTimeoutRef.current), []);
 
   useEffect(() => {
     if (running) {
@@ -67,7 +73,7 @@ export function LoadBalancerSimulator() {
           {running ? <><Pause className="h-4 w-4 mr-1" />Pause</> : <><Play className="h-4 w-4 mr-1" />Start</>}
         </Button>
         <Button onClick={() => sendRequest()} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,80%)] hover:bg-[hsl(230,20%,15%)]">Send One</Button>
-        <Button onClick={reset} variant="outline" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
+        <Button onClick={reset} variant="outline" aria-label="Reset simulation" className="border-[hsl(230,20%,25%)] text-[hsl(0,0%,60%)]"><RotateCcw className="h-4 w-4" /></Button>
         <span className="text-xs text-[hsl(0,0%,45%)] self-center ml-auto">Total: {totalRequests}</span>
       </div>
 

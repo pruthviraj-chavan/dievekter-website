@@ -35,7 +35,7 @@ export function UuidGeneratorTool() {
         {uuids.map((uuid, i) => (
           <div key={i} className="flex items-center gap-2 bg-[hsl(230,25%,8%)] border border-[hsl(230,20%,20%)] rounded-lg px-4 py-2.5">
             <code className="flex-1 text-sm font-mono text-[hsl(40,80%,70%)]">{uuid}</code>
-            <Button size="icon" variant="ghost" onClick={() => copy(uuid, i)} className="text-[hsl(0,0%,60%)] hover:text-white shrink-0">
+            <Button size="icon" variant="ghost" onClick={() => copy(uuid, i)} aria-label={`Copy UUID ${i + 1}`} className="text-[hsl(0,0%,60%)] hover:text-white shrink-0">
               {copiedIdx === i ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             </Button>
           </div>

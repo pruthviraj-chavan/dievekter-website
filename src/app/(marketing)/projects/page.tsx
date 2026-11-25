@@ -39,7 +39,7 @@ export default function ProjectsPage() {
         ]}
       />
       <SiteNav />
-      <main className="flex-grow pt-24">
+      <main id="main-content" tabIndex={-1} className="flex-grow pt-24 focus:outline-none">
         <section className="dv-dot-bg relative overflow-hidden pt-16 sm:pt-20 pb-8">
           <ScaleGlow
             aria-hidden
