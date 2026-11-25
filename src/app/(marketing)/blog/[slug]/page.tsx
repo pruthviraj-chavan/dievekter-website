@@ -18,6 +18,7 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogArchiveClient } from "@/components/blog/BlogArchiveClient";
 import { ArticleContent, extractArticleHeadings } from "@/components/blog/ArticleContent";
 import { ShareArticleButton } from "@/components/blog/ShareArticleButton";
+import { NewsletterSignupForm } from "@/components/forms/NewsletterSignupForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -458,6 +459,18 @@ export default async function BlogSlugPage({
               </div>
             </div>
           </div>
+        </section>
+
+        <section className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-4xl pb-12">
+          <NewsletterSignupForm
+            variant="card"
+            sourcePage="blog-post"
+            defaultInterest={
+              categoryInfo?.slug === "study-in-germany" || categoryInfo?.slug === "study-abroad"
+                ? "study_abroad"
+                : "technology"
+            }
+          />
         </section>
 
         {relatedPosts.length > 0 && (

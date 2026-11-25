@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, CheckCircle, Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
 import { TrackedLink } from "@/components/analytics/TrackedLink";
@@ -11,6 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { SITE_CONFIG } from "@/config/site";
 import {
   trackEnquiryVerticalSelect,
+  trackFormError,
+  trackFormStarted,
   trackLeadSubmission,
   type AnalyticsVertical,
 } from "@/lib/analytics/gtag";
@@ -54,6 +56,7 @@ export function ContactEnquiryForm() {
     emailSent: boolean;
     whatsappUrl: string;
   } | null>(null);
+  const startedRef = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -74,6 +77,10 @@ export function ContactEnquiryForm() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackFormStarted("contact_enquiry", "/contact");
+    }
     setErrorMsg(null);
     setSubmittedState(null);
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -92,6 +99,7 @@ export function ContactEnquiryForm() {
     if (!parsed.success) {
       const firstErr = parsed.error.issues[0]?.message || "Please check your form details";
       setErrorMsg(firstErr);
+      trackFormError("contact_enquiry", firstErr);
       toast.error(firstErr);
       return;
     }

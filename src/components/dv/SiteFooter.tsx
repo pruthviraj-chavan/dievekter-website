@@ -9,6 +9,7 @@ import {
   WaveFooterRibbon,
 } from "@/components/dv/WaveFooterBand";
 import { CookiePreferencesTrigger } from "@/components/layout/CookiePreferencesModal";
+import { NewsletterSignupForm } from "@/components/forms/NewsletterSignupForm";
 
 export function SiteFooter() {
   const year = 2026;
@@ -116,6 +117,9 @@ export function SiteFooter() {
               </div>
             ))}
           </nav>
+
+          {/* Newsletter Dispatch Onboarding */}
+          <NewsletterSignupForm variant="footer" sourcePage="footer" className="mt-8" />
 
           {/* Office Addresses Compact Summary */}
           <div className="mt-8 border-t border-white/10 pt-6 grid gap-4 md:grid-cols-3 text-[11px] text-stone-400">

@@ -281,8 +281,42 @@ async function main() {
     check(
       homeRes.body.includes("info@dievekter.com") &&
         homeRes.body.includes("86004 69912") &&
-        !homeRes.body.includes("team.dievekter@gmail.com"),
-      "Homepage missing updated email/phone or still contains old gmail address",
+        homeRes.body.includes("GTM-NKRTP332") &&
+        homeRes.body.includes("G-XLDPHSXXCS") &&
+        !homeRes.body.includes("team.dievekter@gmail.com") &&
+        !homeRes.body.includes("og-ima.png") &&
+        !homeRes.body.includes("gptengineer"),
+      "Homepage missing updated email/phone/GTM/GA4 or contains legacy references",
+    );
+
+    for (const assetPath of ["/favicon.ico", "/icon.png", "/apple-icon.png", "/manifest.webmanifest"]) {
+      const assetRes = await requestRaw(assetPath);
+      check(assetRes.status === 200, `${assetPath}: expected HTTP 200, got ${assetRes.status}`);
+    }
+
+    const newsletterValid = await fetch(`${BASE}/api/newsletter`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: "subscriber@example.com",
+        interest: "study_abroad",
+        sourcePage: "/blog",
+      }),
+    });
+    const newsletterJson = await newsletterValid.json();
+    check(
+      newsletterValid.status === 200 && newsletterJson.ok === true && newsletterJson.subscribed === true,
+      `/api/newsletter valid failed: ${newsletterValid.status}`,
+    );
+
+    const newsletterInvalid = await fetch(`${BASE}/api/newsletter`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "not-an-email" }),
+    });
+    check(
+      newsletterInvalid.status === 400,
+      `/api/newsletter invalid expected 400, got ${newsletterInvalid.status}`,
     );
 
     const spamApi = await fetch(`${BASE}/api/contact`, {

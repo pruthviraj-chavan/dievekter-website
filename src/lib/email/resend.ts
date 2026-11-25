@@ -334,3 +334,223 @@ export async function sendWhatsAppClickEmail({
     text,
   });
 }
+
+const NEWSLETTER_TRACK_COPY: Record<
+  "all" | "technology" | "study_abroad",
+  {
+    label: string;
+    primaryCtaText: string;
+    primaryCtaHref: string;
+    quickLinks: Array<{ title: string; href: string }>;
+  }
+> = {
+  all: {
+    label: "All Topics (Technology & Study Abroad)",
+    primaryCtaText: "Explore All Guides on dieVekter Journal",
+    primaryCtaHref: "https://www.dievekter.com/blog",
+    quickLinks: [
+      {
+        title: "Agentic AI vs Standard Chatbots in Production",
+        href: "https://www.dievekter.com/blog/agentic-ai-vs-standard-chatbots-production-workflows-india",
+      },
+      {
+        title: "Complete Guide to Study in Germany for Indian Students",
+        href: "https://www.dievekter.com/blog/study-in-germany-complete-guide-indian-students",
+      },
+      {
+        title: "Custom Software, AI & Automation Services",
+        href: "https://www.dievekter.com/services",
+      },
+    ],
+  },
+  technology: {
+    label: "Technology Solutions & AI Engineering",
+    primaryCtaText: "Read Engineering & AI Guides",
+    primaryCtaHref: "https://www.dievekter.com/blog/artificial-intelligence",
+    quickLinks: [
+      {
+        title: "Agentic AI vs Standard Chatbots in Production",
+        href: "https://www.dievekter.com/blog/agentic-ai-vs-standard-chatbots-production-workflows-india",
+      },
+      {
+        title: "Custom React Websites vs Templates: Technical SEO",
+        href: "https://www.dievekter.com/blog/custom-react-websites-vs-templates-technical-seo-indian-businesses",
+      },
+      {
+        title: "Interactive Developer Kit & System Simulators",
+        href: "https://www.dievekter.com/development-kit",
+      },
+    ],
+  },
+  study_abroad: {
+    label: "Study in Germany & Overseas Admissions",
+    primaryCtaText: "Open Verified Study in Germany Hub",
+    primaryCtaHref: "https://www.dievekter.com/study-abroad/germany",
+    quickLinks: [
+      {
+        title: "APS Certificate India Checklist & Timeline",
+        href: "https://www.dievekter.com/blog/aps-certificate-india-checklist-documents-timeline-germany",
+      },
+      {
+        title: "Blocked Account (Sperrkonto) & Health Insurance Guide",
+        href: "https://www.dievekter.com/blog/blocked-account-sperrkonto-health-insurance-german-student-visa",
+      },
+      {
+        title: "Book Personalized Overseas Education Counselling",
+        href: "https://www.dievekter.com/contact?vertical=study-abroad",
+      },
+    ],
+  },
+};
+
+async function syncResendAudienceContact(email: string, firstName?: string): Promise<boolean> {
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const audienceId = process.env.RESEND_AUDIENCE_ID?.trim();
+  if (!apiKey || !audienceId) return false;
+
+  try {
+    const res = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        ...(firstName ? { first_name: firstName } : {}),
+        unsubscribed: false,
+      }),
+      signal: AbortSignal.timeout(5000),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+export async function sendNewsletterSubscriptionEmails({
+  email,
+  name,
+  interest,
+  sourcePage,
+}: {
+  email: string;
+  name?: string;
+  interest: "all" | "technology" | "study_abroad";
+  sourcePage: string;
+}): Promise<{
+  welcome: EmailSendResult;
+  internal: EmailSendResult;
+  audienceSynced: boolean;
+}> {
+  const track = NEWSLETTER_TRACK_COPY[interest];
+  const greetingName = name?.trim() ? name.trim() : "there";
+  const recipients = getRecipients();
+
+  const quickLinksHtml = track.quickLinks
+    .map(
+      (item) => `
+      <li style="margin:8px 0;">
+        <a href="${escapeHtml(item.href)}" style="color:#ff5422;text-decoration:none;font-weight:600;">
+          ${escapeHtml(item.title)} →
+        </a>
+      </li>`,
+    )
+    .join("");
+
+  // Email 1 (Onboarding Welcome + Single Primary Next Step per Email Types Reference)
+  const welcomeHtml = `
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:24px 12px;background:#f7f5f2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#141210;">
+  <div style="max-width:640px;margin:0 auto;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #fbe0d4;box-shadow:0 8px 28px rgba(20,18,16,0.06);">
+    <div style="background:#141210;padding:24px 28px;">
+      <span style="display:inline-block;background:#ff5422;color:#ffffff;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;border-radius:999px;">
+        dieVekter Dispatch · Welcome
+      </span>
+      <h1 style="margin:14px 0 6px;font-size:22px;line-height:1.3;color:#ffffff;font-weight:700;">
+        Welcome to dieVekter, ${escapeHtml(greetingName)}.
+      </h1>
+      <p style="margin:0;font-size:13px;color:#d6d3d1;">
+        Track selected: ${escapeHtml(track.label)}
+      </p>
+    </div>
+    <div style="padding:26px 28px;font-size:14px;line-height:1.65;color:#292524;">
+      <p style="margin:0 0 14px;">
+        Thank you for subscribing to our monthly engineering and study abroad dispatch. You&apos;ll receive practical guides built from real production deployments and verified Germany admissions checklists—never generic filler.
+      </p>
+      <div style="margin:22px 0;">
+        <a href="${escapeHtml(track.primaryCtaHref)}" style="display:inline-block;background:#ff5422;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;padding:12px 22px;border-radius:999px;">
+          ${escapeHtml(track.primaryCtaText)} →
+        </a>
+      </div>
+      <div style="margin-top:20px;padding:16px 18px;border-radius:12px;background:#fff8f5;border:1px solid #fbe0d4;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#ff5422;margin-bottom:8px;">
+          Recommended Next Reads
+        </div>
+        <ul style="margin:0;padding-left:18px;">${quickLinksHtml}</ul>
+      </div>
+      <p style="margin:22px 0 0;font-size:12px;color:#78716c;">
+        Need help on a specific software project or university intake? Reply directly to <a href="mailto:${escapeHtml(SITE_CONFIG.email)}" style="color:#141210;font-weight:600;">${escapeHtml(SITE_CONFIG.email)}</a> or message us on WhatsApp (${escapeHtml(SITE_CONFIG.telephone)}).
+      </p>
+      <hr style="border:none;border-top:1px solid #f0e6e0;margin:20px 0;" />
+      <p style="margin:0;font-size:11px;color:#a8a29e;">
+        DIEVEKTER · Radhanagari, Kolhapur &amp; Phondaghat, Maharashtra, India ·
+        <a href="mailto:${escapeHtml(SITE_CONFIG.email)}?subject=Unsubscribe%20dieVekter%20Dispatch" style="color:#78716c;">Unsubscribe anytime</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>`.trim();
+
+  const welcomeText = [
+    `Welcome to dieVekter Dispatch, ${greetingName}.`,
+    `Track: ${track.label}`,
+    "",
+    `Start here: ${track.primaryCtaHref}`,
+    ...track.quickLinks.map((q) => `- ${q.title}: ${q.href}`),
+    "",
+    `Questions? Reply to ${SITE_CONFIG.email} or call ${SITE_CONFIG.telephone}.`,
+    `Unsubscribe anytime by emailing ${SITE_CONFIG.email}.`,
+  ].join("\n");
+
+  const internalHtml = buildBrandedHtml({
+    badge: "Newsletter Subscriber",
+    heading: `New Dispatch Subscriber — ${email}`,
+    intro: `Subscribed from ${sourcePage} (${track.label})`,
+    rows: [
+      { label: "Subscriber Email", value: email },
+      { label: "Subscriber Name", value: name?.trim() || "Not provided" },
+      { label: "Topic Track", value: track.label },
+      { label: "Source Page", value: sourcePage },
+    ],
+  });
+
+  const internalText = [
+    `New dieVekter Newsletter Subscriber`,
+    `Email: ${email}`,
+    `Name: ${name?.trim() || "Not provided"}`,
+    `Track: ${track.label}`,
+    `Source Page: ${sourcePage}`,
+  ].join("\n");
+
+  const [welcome, internal, audienceSynced] = await Promise.all([
+    sendViaResend({
+      to: [email],
+      subject: "Welcome to dieVekter Dispatch — Where to Start",
+      html: welcomeHtml,
+      text: welcomeText,
+      replyTo: SITE_CONFIG.email,
+    }),
+    sendViaResend({
+      to: recipients,
+      subject: `[dieVekter Newsletter] New subscriber: ${email} (${track.label})`,
+      html: internalHtml,
+      text: internalText,
+      replyTo: email,
+    }),
+    syncResendAudienceContact(email, name?.trim() || undefined),
+  ]);
+
+  return { welcome, internal, audienceSynced };
+}

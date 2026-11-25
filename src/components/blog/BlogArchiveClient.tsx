@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { DriftWatermark } from "@/components/animation/MotionPrimitives";
-import { trackBlogCategorySelect } from "@/lib/analytics/gtag";
+import { NewsletterSignupForm } from "@/components/forms/NewsletterSignupForm";
+import { trackBlogCategorySelect, trackSearchPerformed } from "@/lib/analytics/gtag";
 import {
   BLOG_CATEGORIES,
   BlogCategorySlug,
@@ -21,6 +22,7 @@ export function BlogArchiveClient({
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState("All");
+  const lastTrackedQueryRef = useRef("");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -67,6 +69,27 @@ export function BlogArchiveClient({
       return matchesTag && matchesSearch;
     });
   }, [categoryPosts, searchTerm, selectedTag]);
+
+  useEffect(() => {
+    const trimmed = searchTerm.trim();
+    if (trimmed.length < 2 || trimmed === lastTrackedQueryRef.current) return;
+    const timer = window.setTimeout(() => {
+      lastTrackedQueryRef.current = trimmed;
+      trackSearchPerformed({
+        query: trimmed,
+        searchLocation: "blog-archive",
+        resultsCount: filteredPosts.length,
+      });
+    }, 650);
+    return () => window.clearTimeout(timer);
+  }, [searchTerm, filteredPosts.length]);
+
+  const newsletterInterest =
+    initialCategory === "study-in-germany" || initialCategory === "study-abroad"
+      ? "study_abroad"
+      : initialCategory
+        ? "technology"
+        : "all";
 
   return (
     <main id="main-content" tabIndex={-1} className="dv-dot-bg flex-grow pt-24 sm:pt-28 pb-20 sm:pb-24 focus:outline-none">
@@ -213,6 +236,14 @@ export function BlogArchiveClient({
             </button>
           </div>
         )}
+
+        <div className="mt-12">
+          <NewsletterSignupForm
+            variant="card"
+            sourcePage="blog-archive"
+            defaultInterest={newsletterInterest}
+          />
+        </div>
       </section>
     </main>
   );

@@ -18,7 +18,7 @@
 Removed completely after Next.js App Router verification passed:
 
 - Files removed: `vite.config.ts`, `index.html`, `tsconfig.app.json`, `tsconfig.node.json`, `dist/`, `dist-ssr/`, `src/main.tsx`, `src/App.tsx`, `src/AppRoutes.tsx`, `src/entry-ssr.tsx`, `src/index.css`, `src/vite-env.d.ts`, `src/pages/**`, `src/data/seoConfig.ts`, `src/components/CanonicalUrl.tsx`, `src/components/seo/SeoHead.tsx`, `src/lib/analytics.ts`, `scripts/prerender.mjs`, `scripts/validate-seo-build.mjs`, and conflicting static `public/robots.txt` & `public/sitemap.xml`.
-- Packages removed (38 dependencies uninstalled via `npm uninstall`): `vite`, `@vitejs/plugin-react-swc`, `@lovable.dev/vite-plugin-dev-server-bridge`, `@lovable.dev/vite-plugin-hmr-gate`, `lovable-tagger`, `react-router-dom`, `react-helmet`, `@tanstack/react-query` (verified unused across `src/`), `three`, `@types/three` (verified unused across `src/`), and `eslint-plugin-react-refresh`.
+- Packages removed (38 dependencies uninstalled via `npm uninstall`): `vite`, `@vitejs/plugin-react-swc`, legacy SPA bridge/tagger plugins, `react-router-dom`, `react-helmet`, `@tanstack/react-query` (verified unused across `src/`), `three`, `@types/three` (verified unused across `src/`), and `eslint-plugin-react-refresh`.
 
 ## 4. Visual & Functional Parity Verification
 

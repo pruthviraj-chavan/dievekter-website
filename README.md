@@ -1,33 +1,28 @@
+# dieVekter (`www.dievekter.com`)
 
+Production web platform for **dieVekter** (`DIEVEKTER`), built with **Next.js 15 App Router**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, and **Resend** across two core verticals:
 
-# Step 3: Install the necessary dependencies. j
-npm i
+- **Technology Solutions**: Custom website development, mobile apps, enterprise software, e-commerce platforms, autonomous AI agents, chatbots & voicebots, workflow automation, CRM/API integrations, and UI/UX systems.
+- **Study Abroad Consultancy**: Verified overseas education counselling and Germany admissions, shortlisting, APS documentation readiness, and student visa guidance.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Quick Start
+
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open `http://localhost:3000`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Quality & Production Verification
 
-**Use GitHub Codespaces**
+```bash
+npm run typecheck   # TypeScript verification
+npm run lint        # ESLint with zero errors/warnings
+npm run build       # Next.js 15 production SSG/SSR build
+npm run seo:check   # SSR HTML, canonical, schema JSON-LD, redirects & API verification
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Architecture & Environment Configuration
 
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
+See [ENVIRONMENT-SETUP.md](./docs/ENVIRONMENT-SETUP.md), [NEXTJS-ARCHITECTURE.md](./docs/NEXTJS-ARCHITECTURE.md), and [GOOGLE-SETUP-GUIDE.md](./docs/GOOGLE-SETUP-GUIDE.md) for deployment, GTM (`GTM-NKRTP332`), GA4 (`G-XLDPHSXXCS`), and Resend email configuration.

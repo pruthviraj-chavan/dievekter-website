@@ -18,6 +18,9 @@ src/
 │   │   ├── fun/page.tsx                     # Memory card game (noindex)
 │   │   ├── internship/page.tsx              # Student internships
 │   │   ├── jobs/page.tsx                    # Careers board
+│   │   ├── locations/
+│   │   │   ├── page.tsx                     # Regional offices hub (/locations)
+│   │   │   └── [slug]/page.tsx              # Radhanagari, Kolhapur & Phondaghat office guides
 │   │   ├── portfolio/page.tsx               # Selected systems + live builds
 │   │   ├── privacy/page.tsx                 # Privacy Policy & verification disclosures
 │   │   ├── products/page.tsx                # Software & retail billing products
@@ -40,14 +43,22 @@ src/
 │   │   │   ├── admission-assistance/page.tsx
 │   │   │   ├── visa-guidance/page.tsx
 │   │   │   └── student-resources/page.tsx
+│   │   ├── acceptable-use/page.tsx          # AI & Platform Acceptable Use Policy
+│   │   ├── support-policy/page.tsx          # SLA & Support Policy
+│   │   ├── terms-of-use/page.tsx            # Platform Terms of Use
 │   │   └── terms/page.tsx                   # Terms & Study Abroad disclaimers
 │   ├── api/
-│   │   ├── contact/route.ts                 # POST /api/contact (Zod + rate limit + webhook)
-│   │   └── enquiry/route.ts                 # POST /api/enquiry (Zod + rate limit + webhook)
+│   │   ├── careers/route.ts                 # POST /api/careers (Job/internship email + WhatsApp)
+│   │   ├── contact/route.ts                 # POST /api/contact (Zod + rate limit + Resend/webhook)
+│   │   ├── enquiry/route.ts                 # POST /api/enquiry (Zod + rate limit + Resend/webhook)
+│   │   ├── newsletter/route.ts              # POST /api/newsletter (Zod + Resend welcome & team alert)
+│   │   └── whatsapp-notify/route.ts         # POST /api/whatsapp-notify (WhatsApp click notification)
+│   ├── apple-icon.png                       # Apple touch icon (180x180)
 │   ├── error.tsx                            # Client error boundary UI
 │   ├── globals.css                          # Tailwind CSS + .dv-home scoped styling
-│   ├── icon.png                             # App favicon asset
-│   ├── layout.tsx                           # Root layout, next/font, GA4, Toaster
+│   ├── icon.png                             # App favicon asset (192x192)
+│   ├── layout.tsx                           # Root layout, next/font, GTM-NKRTP332, GA4, Toaster
+│   ├── manifest.ts                          # Web app manifest (/manifest.webmanifest)
 │   ├── not-found.tsx                        # Native HTTP 404 page
 │   ├── robots.ts                            # App-generated /robots.txt
 │   └── sitemap.ts                           # App-generated /sitemap.xml

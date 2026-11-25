@@ -32,13 +32,23 @@ const DEFAULT_PREFS: CookiePrefs = {
 };
 
 function applyConsentToGtag(prefs: CookiePrefs) {
-  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
-  window.gtag("consent", "update", {
-    analytics_storage: prefs.analytics ? "granted" : "denied",
-    functionality_storage: prefs.functional ? "granted" : "denied",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
+  if (typeof window === "undefined") return;
+  const analyticsState = prefs.analytics ? "granted" : "denied";
+  const functionalState = prefs.functional ? "granted" : "denied";
+  if (typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      analytics_storage: analyticsState,
+      functionality_storage: functionalState,
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "consent_updated",
+    analytics_storage: analyticsState,
+    functionality_storage: functionalState,
   });
 }
 

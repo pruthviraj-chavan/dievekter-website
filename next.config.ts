@@ -54,6 +54,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/favicon.ico.png",
+        destination: "/icon-192.png",
+        permanent: true,
+      },
+      {
         source: "/blog/category/:category",
         destination: "/blog/:category",
         permanent: true,
@@ -174,12 +179,12 @@ const nextConfig: NextConfig = {
   async headers() {
     const contentSecurityPolicy = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
-      "style-src 'self' 'unsafe-inline'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com",
+      "style-src 'self' 'unsafe-inline' https://tagmanager.google.com https://fonts.googleapis.com",
       "img-src 'self' data: https:",
-      "font-src 'self' data:",
-      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com",
-      "frame-src 'self' https://www.google.com https://maps.google.com",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net",
+      "frame-src 'self' https://www.google.com https://maps.google.com https://www.googletagmanager.com",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
