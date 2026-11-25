@@ -230,6 +230,51 @@ async function main() {
     });
     check(badApi.status === 400, `/api/enquiry invalid request expected 400, got ${badApi.status}`);
 
+    const careerValid = await fetch(`${BASE}/api/careers`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        applicationType: "job",
+        role: "Full Stack Developer",
+        name: "Test Applicant",
+        email: "applicant@example.com",
+        phone: "+91 99999 00000",
+        message: "Testing career submission verification.",
+      }),
+    });
+    const careerJson = await careerValid.json();
+    check(careerValid.status === 200 && careerJson.ok === true, `/api/careers valid failed: ${careerValid.status}`);
+
+    const careerInvalid = await fetch(`${BASE}/api/careers`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "A", email: "bad", phone: "12" }),
+    });
+    check(careerInvalid.status === 400, `/api/careers invalid expected 400, got ${careerInvalid.status}`);
+
+    const waNotify = await fetch(`${BASE}/api/whatsapp-notify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 NextVerificationBrowser",
+      },
+      body: JSON.stringify({
+        sourcePage: "/contact",
+        ctaLabel: "WhatsApp Chat",
+        prefilledMessage: "Hi Dievekter Tech!",
+        targetUrl: "https://wa.me/919404895667",
+      }),
+    });
+    check(waNotify.status === 200, `/api/whatsapp-notify failed: ${waNotify.status}`);
+
+    const homeRes = await requestRaw("/");
+    check(
+      homeRes.body.includes("info@dievekter.com") &&
+        homeRes.body.includes("86004 69912") &&
+        !homeRes.body.includes("team.dievekter@gmail.com"),
+      "Homepage missing updated email/phone or still contains old gmail address",
+    );
+
     const spamApi = await fetch(`${BASE}/api/contact`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

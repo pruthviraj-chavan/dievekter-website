@@ -2,7 +2,7 @@
 
 **Registered Entity:** DIEVEKTER (`dieVekter` / `DieVekter Tech`)  
 **Verified Base:** Radhanagari, Kolhapur, Maharashtra, India (`UDYAM-MH-15-0320983` · `D-U-N-S 312163123`)  
-**Primary Contact:** `team.dievekter@gmail.com` · `+91 94048 95667`
+**Primary Contact:** `info@dievekter.com` · `+91 94048 95667` · `+91 86004 69912`
 
 ---
 
@@ -14,7 +14,8 @@ Use the exact verified business identity consistently across the website, Schema
 - **Locality / District:** Radhanagari, Kolhapur
 - **State / Country:** Maharashtra, India
 - **Primary Phone / WhatsApp:** `+91 94048 95667`
-- **Primary Email:** `team.dievekter@gmail.com`
+- **Secondary Phone:** `+91 86004 69912`
+- **Primary Email:** `info@dievekter.com`
 - **Website:** `https://www.dievekter.com/`
 
 ---

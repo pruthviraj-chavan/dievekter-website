@@ -15,8 +15,10 @@ All documented configuration variables live in `.env.example` (no secrets commit
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `CONTACT_WEBHOOK_URL` | Optional | Private server endpoint receiving validated JSON enquiries from `POST /api/contact` and `POST /api/enquiry` |
-| `ENQUIRY_FORWARD_EMAIL` | Optional | Target inbox metadata sent alongside webhook forwarding payload |
+| `RESEND_API_KEY` | Yes (Prod) | Server-only API key enabling email delivery via Resend across Contact, Careers, Training, and WhatsApp CTA notifications |
+| `RESEND_FROM_EMAIL` | Optional | Verified Resend sender identity (defaults to `dieVekter <notifications@dievekter.com>`) |
+| `ENQUIRY_FORWARD_EMAIL` | Optional | Comma-separated inbox recipients (defaults to `info@dievekter.tech,info@dievekter.com`) |
+| `CONTACT_WEBHOOK_URL` | Optional | Private server endpoint receiving validated JSON enquiries alongside email delivery |
 
 ## 3. Vercel Platform Environment Variable Note
 

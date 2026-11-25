@@ -73,6 +73,14 @@ export function SiteFooter() {
             >
               Call: {SITE_CONFIG.telephone}
             </TrackedLink>
+            <span aria-hidden="true">·</span>
+            <TrackedLink
+              href={`tel:${SITE_CONFIG.secondaryTelephoneE164}`}
+              track={{ kind: "contact", channel: "phone", sourcePage: "footer" }}
+              className="hover:text-white transition-colors"
+            >
+              {SITE_CONFIG.secondaryTelephone}
+            </TrackedLink>
             <span aria-hidden="true" className="hidden sm:inline">
               ·
             </span>

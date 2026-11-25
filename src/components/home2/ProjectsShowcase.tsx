@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { DriftWatermark, ScaleGlow } from "@/components/animation/MotionPrimitives";
 import {
   AnimatedProjectsShowcase,
@@ -52,14 +53,15 @@ export function ProjectsShowcase() {
           >
             Open Full Projects Showcase <ArrowUpRight className="h-4 w-4" />
           </Link>
-          <a
+          <TrackedLink
             href="https://wa.me/919404895667?text=Hi%20Dievekter%20Tech!%20I%20saw%20your%20websites%20and%20want%20to%20build%20a%20project."
             target="_blank"
             rel="noopener noreferrer"
+            track={{ kind: "contact", channel: "whatsapp", sourcePage: "projects-showcase" }}
             className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-6 py-3 text-sm font-semibold text-[#141210] transition-colors hover:border-[#FF5422] hover:text-[#FF5422]"
           >
             Chat on WhatsApp (+91 94048 95667) <ArrowUpRight className="h-4 w-4 text-[#FF5422]" />
-          </a>
+          </TrackedLink>
         </div>
       </div>
     </section>

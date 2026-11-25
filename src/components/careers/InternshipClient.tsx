@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import {
+  ArrowUpRight,
   Brain,
   Briefcase,
   CheckCircle,
@@ -11,11 +12,14 @@ import {
   Globe,
   GraduationCap,
   Laptop,
+  Loader2,
   PenTool,
+  Send,
   TrendingUp,
   Users,
 } from "lucide-react";
 import { toast } from "sonner";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -116,16 +120,24 @@ export function InternshipClient() {
     portfolio: "",
     experience: "",
     message: "",
+    companyWebsite: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittedState, setSubmittedState] = useState<{
+    roleName: string;
+    emailSent: boolean;
+    whatsappUrl: string;
+  } | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    setSubmittedState(null);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleRoleSelect = (roleId: string) => {
     setSelectedRole(roleId === selectedRole ? null : roleId);
+    setSubmittedState(null);
     if (roleId !== selectedRole) {
       window.setTimeout(() => {
         document.getElementById("application-form")?.scrollIntoView({ behavior: "smooth" });
@@ -133,34 +145,84 @@ export function InternshipClient() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedRole) {
-      toast.error("Please select an internship role");
+      toast.error("Please select an internship role above");
       return;
     }
-    if (!formData.name || !formData.email || !formData.phone) {
-      toast.error("Please fill in all required fields");
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
+      toast.error("Please fill in your name, email address, and phone number");
       return;
     }
+
     setIsSubmitting(true);
     const roleName = internshipRoles.find((r) => r.id === selectedRole)?.title || selectedRole;
-    const message = encodeURIComponent(
-      `*New Internship Application*\n*Role:* ${roleName}\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}\n*Education:* ${formData.education}\n*Portfolio:* ${formData.portfolio}\n*Experience:* ${formData.experience}\n*Message:* ${formData.message}`,
-    );
-    window.open(`${SITE_CONFIG.whatsappUrl}?text=${message}`, "_blank");
-    toast.success("Application prepared in WhatsApp!");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      education: "",
-      portfolio: "",
-      experience: "",
-      message: "",
-    });
-    setSelectedRole(null);
-    setIsSubmitting(false);
+
+    try {
+      const res = await fetch("/api/careers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          applicationType: "internship",
+          role: roleName,
+          sourcePage: "/internship",
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          education: formData.education,
+          portfolioUrl: formData.portfolio,
+          experience: formData.experience,
+          message: formData.message,
+          companyWebsite: formData.companyWebsite,
+        }),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        emailSent?: boolean;
+        whatsappUrl?: string;
+      };
+
+      if (!res.ok || !data.ok) {
+        toast.error(data.error || "Unable to submit application right now.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const fallbackWa = `${SITE_CONFIG.whatsappUrl}?text=${encodeURIComponent(
+        `*New Internship Application*\n*Role:* ${roleName}\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Phone:* ${formData.phone}`,
+      )}`;
+
+      setSubmittedState({
+        roleName,
+        emailSent: Boolean(data.emailSent),
+        whatsappUrl: data.whatsappUrl || fallbackWa,
+      });
+
+      toast.success(
+        data.emailSent
+          ? "Internship application emailed straight to our team!"
+          : "Internship application submitted!",
+      );
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        education: "",
+        portfolio: "",
+        experience: "",
+        message: "",
+        companyWebsite: "",
+      });
+      setSelectedRole(null);
+    } catch {
+      toast.error("Network error sending application. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -258,12 +320,51 @@ export function InternshipClient() {
               Apply for an <span className="text-[#FF5422]">Internship</span>
             </h2>
             <p className="text-stone-600 text-sm sm:text-base">
-              Select a role above and fill out the application details below.
+              Select a role above and fill out the application details below — your application is
+              delivered straight to our engineering &amp; HR email desk.
             </p>
           </div>
 
           <div className="bg-white border border-[#FBE0D4] rounded-2xl shadow-sm p-6 sm:p-8">
+            {submittedState && (
+              <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50/80 p-5 text-sm text-emerald-950">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 shrink-0 text-emerald-600 mt-0.5" />
+                  <div>
+                    <p className="font-bold">
+                      Application submitted for {submittedState.roleName}!
+                    </p>
+                    <p className="mt-1 text-xs text-emerald-800 leading-relaxed">
+                      {submittedState.emailSent
+                        ? "Your profile and project links have been emailed directly to our hiring team."
+                        : "Your internship application details have been recorded."}
+                    </p>
+                    <TrackedLink
+                      href={submittedState.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      track={{ kind: "contact", channel: "whatsapp", sourcePage: "/internship" }}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#141210] px-4 py-1.5 text-xs font-semibold text-white hover:bg-[#FF5422] transition-colors"
+                    >
+                      Also Follow Up on WhatsApp <ArrowUpRight className="h-3.5 w-3.5" />
+                    </TrackedLink>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-5">
+              <input
+                type="text"
+                name="companyWebsite"
+                value={formData.companyWebsite}
+                onChange={handleInputChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
+
               {selectedRole ? (
                 <div className="p-3.5 bg-[#FFF4F0] border border-[#FBE0D4] rounded-xl flex items-center gap-3">
                   <CheckCircle className="text-[#FF5422]" size={20} />
@@ -380,7 +481,15 @@ export function InternshipClient() {
                   size="lg"
                   disabled={isSubmitting || !selectedRole}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Application"}
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting Application...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="mr-2 h-4 w-4" /> Submit Application
+                    </>
+                  )}
                 </Button>
                 <Button
                   type="button"
@@ -396,8 +505,10 @@ export function InternshipClient() {
                       portfolio: "",
                       experience: "",
                       message: "",
+                      companyWebsite: "",
                     });
                     setSelectedRole(null);
+                    setSubmittedState(null);
                   }}
                 >
                   Reset
@@ -415,14 +526,41 @@ export function InternshipClient() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Briefcase, title: "Real-World Projects", desc: "Work on live client platforms and build a strong engineering portfolio." },
-              { icon: GraduationCap, title: "Mentorship", desc: "Learn directly from experienced engineers throughout your internship." },
-              { icon: Download, title: "Skill Development", desc: "Gain hands-on experience with AI agents, TypeScript, and automation." },
-              { icon: TrendingUp, title: "Career Growth", desc: "Full-time opportunities based on performance and team fit." },
-              { icon: Users, title: "Collaborative Culture", desc: "Work closely with product designers and developers." },
-              { icon: CheckCircle, title: "Completion Certificate", desc: "Receive a verified certificate and recommendation letter." },
+              {
+                icon: Briefcase,
+                title: "Real-World Projects",
+                desc: "Work on live client platforms and build a strong engineering portfolio.",
+              },
+              {
+                icon: GraduationCap,
+                title: "Mentorship",
+                desc: "Learn directly from experienced engineers throughout your internship.",
+              },
+              {
+                icon: Download,
+                title: "Skill Development",
+                desc: "Gain hands-on experience with AI agents, TypeScript, and automation.",
+              },
+              {
+                icon: TrendingUp,
+                title: "Career Growth",
+                desc: "Full-time opportunities based on performance and team fit.",
+              },
+              {
+                icon: Users,
+                title: "Collaborative Culture",
+                desc: "Work closely with product designers and developers.",
+              },
+              {
+                icon: CheckCircle,
+                title: "Completion Certificate",
+                desc: "Receive a verified certificate and recommendation letter.",
+              },
             ].map((b) => (
-              <div key={b.title} className="rounded-2xl border border-[#FBE0D4] bg-white p-6 shadow-sm">
+              <div
+                key={b.title}
+                className="rounded-2xl border border-[#FBE0D4] bg-white p-6 shadow-sm"
+              >
                 <b.icon className="h-7 w-7 text-[#FF5422] mb-3" />
                 <h3 className="text-lg font-bold text-[#141210] mb-1.5">{b.title}</h3>
                 <p className="text-sm text-stone-600">{b.desc}</p>

@@ -75,8 +75,8 @@ export default function SupportPolicyPage() {
             <strong>WhatsApp Support &amp; Quick Triage:</strong> {SITE_CONFIG.telephone}
           </li>
           <li>
-            <strong>Direct Phone Line:</strong> {SITE_CONFIG.telephone} (for P1 urgency or scheduled
-            reviews)
+            <strong>Direct Phone Lines:</strong> {SITE_CONFIG.telephone} ·{" "}
+            {SITE_CONFIG.secondaryTelephone} (for P1 urgency or scheduled reviews)
           </li>
         </ul>
       </section>

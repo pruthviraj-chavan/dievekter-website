@@ -68,6 +68,14 @@ export function buildOrganizationSchema() {
         areaServed: ["IN", "DE", "Global"],
         availableLanguage: ["English", "Hindi", "Marathi"],
       },
+      {
+        "@type": "ContactPoint",
+        contactType: "sales and admissions",
+        telephone: SITE_CONFIG.secondaryTelephoneE164,
+        email: SITE_CONFIG.email,
+        areaServed: ["IN", "DE", "Global"],
+        availableLanguage: ["English", "Hindi", "Marathi"],
+      },
     ],
   };
 }

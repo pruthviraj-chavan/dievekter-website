@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Mail, Menu, X } from "lucide-react";
 import { MOBILE_EXTRA_LINKS, PRIMARY_NAV } from "@/config/navigation";
+import { SITE_CONFIG } from "@/config/site";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { cn } from "@/lib/utils";
 
 function isNavActive(item: (typeof PRIMARY_NAV)[number], pathname: string): boolean {
@@ -154,18 +156,35 @@ export function SiteNav() {
               </div>
 
               <div className="pt-6 border-t border-stone-200 space-y-2 text-xs text-stone-500">
-                <a href="mailto:team.dievekter@gmail.com" className="block hover:text-[#FF5422]">
-                  team.dievekter@gmail.com
-                </a>
-                <a
-                  href="https://wa.me/919404895667"
-                  target="_blank"
-                  rel="noreferrer noopener"
+                <TrackedLink
+                  href={`mailto:${SITE_CONFIG.email}`}
+                  track={{ kind: "contact", channel: "email", sourcePage: "mobile-nav" }}
                   className="block hover:text-[#FF5422]"
                 >
-                  WhatsApp: +91 94048 95667
-                </a>
-                <p>Radhanagari, Kolhapur · UDYAM-MH-15-0320983</p>
+                  {SITE_CONFIG.email}
+                </TrackedLink>
+                <TrackedLink
+                  href={SITE_CONFIG.whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  track={{ kind: "contact", channel: "whatsapp", sourcePage: "mobile-nav" }}
+                  className="block hover:text-[#FF5422]"
+                >
+                  WhatsApp: {SITE_CONFIG.telephone}
+                </TrackedLink>
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  <a href={`tel:${SITE_CONFIG.telephoneE164}`} className="hover:text-[#FF5422]">
+                    {SITE_CONFIG.telephone}
+                  </a>
+                  <span aria-hidden="true">·</span>
+                  <a
+                    href={`tel:${SITE_CONFIG.secondaryTelephoneE164}`}
+                    className="hover:text-[#FF5422]"
+                  >
+                    {SITE_CONFIG.secondaryTelephone}
+                  </a>
+                </div>
+                <p>Radhanagari · Kolhapur · Phondaghat · {SITE_CONFIG.udyam}</p>
               </div>
             </div>
           </motion.div>

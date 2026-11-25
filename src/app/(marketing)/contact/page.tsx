@@ -16,7 +16,7 @@ import {
 
 const TITLE = "Contact dieVekter | Software Development & Study Abroad Consultation";
 const DESC =
-  "Contact DieVekter Tech at our Head Office in Radhanagari or branches in Kolhapur (Rajarampuri) & Phondaghat via WhatsApp (+91 94048 95667), phone or email.";
+  "Contact DieVekter Tech at our Head Office in Radhanagari or branches in Kolhapur (Rajarampuri) & Phondaghat via email (info@dievekter.com), phone (+91 94048 95667 / +91 86004 69912), or WhatsApp.";
 
 export const metadata: Metadata = buildPageMetadata({
   path: "/contact",
@@ -99,13 +99,25 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-[#141210]">Call Directly</h3>
-                      <TrackedLink
-                        href={`tel:${SITE_CONFIG.telephoneE164}`}
-                        track={{ kind: "contact", channel: "phone", sourcePage: "/contact" }}
-                        className="text-sm text-stone-600 hover:text-[#FF5422] transition-colors"
-                      >
-                        {SITE_CONFIG.telephone}
-                      </TrackedLink>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <TrackedLink
+                          href={`tel:${SITE_CONFIG.telephoneE164}`}
+                          track={{ kind: "contact", channel: "phone", sourcePage: "/contact" }}
+                          className="text-sm text-stone-600 hover:text-[#FF5422] transition-colors"
+                        >
+                          {SITE_CONFIG.telephone}
+                        </TrackedLink>
+                        <span aria-hidden="true" className="text-stone-300">
+                          ·
+                        </span>
+                        <TrackedLink
+                          href={`tel:${SITE_CONFIG.secondaryTelephoneE164}`}
+                          track={{ kind: "contact", channel: "phone", sourcePage: "/contact" }}
+                          className="text-sm text-stone-600 hover:text-[#FF5422] transition-colors"
+                        >
+                          {SITE_CONFIG.secondaryTelephone}
+                        </TrackedLink>
+                      </div>
                     </div>
                   </div>
 

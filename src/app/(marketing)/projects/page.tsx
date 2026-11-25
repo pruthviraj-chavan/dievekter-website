@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SiteNav } from "@/components/dv/SiteNav";
 import { SiteFooter } from "@/components/dv/SiteFooter";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { CtaBand } from "@/components/home2/CtaBand";
 import {
   AnimatedProjectsShowcase,
@@ -89,16 +90,17 @@ export default function ProjectsPage() {
                 >
                   Start Your Project <ArrowUpRight className="h-4 w-4" />
                 </Link>
-                <a
+                <TrackedLink
                   href={`${SITE_CONFIG.whatsappUrl}?text=${encodeURIComponent(
                     "Hi Dievekter Tech! I would like to start a website or app project.",
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  track={{ kind: "contact", channel: "whatsapp", sourcePage: "/projects" }}
                   className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-7 py-3.5 text-sm font-semibold text-[#141210] transition-colors hover:border-[#FF5422] hover:text-[#FF5422]"
                 >
                   WhatsApp ({SITE_CONFIG.telephone}) <ArrowUpRight className="h-4 w-4 text-[#FF5422]" />
-                </a>
+                </TrackedLink>
               </div>
             </div>
           </div>

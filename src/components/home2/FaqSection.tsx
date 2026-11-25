@@ -31,7 +31,7 @@ export const HOME_FAQS: FaqSchemaItem[] = [
   {
     question: "How can I start a software project or book a Study Abroad consultation?",
     answer:
-      "You can submit a brief on our Contact page, message us on WhatsApp at +91 94048 95667, or email team.dievekter@gmail.com. Select whether your enquiry relates to Technology Solutions or Study Abroad Consultancy so the right team responds with next steps.",
+      "You can submit a brief on our Contact page, message us on WhatsApp at +91 94048 95667, call +91 94048 95667 or +91 86004 69912, or email info@dievekter.com. Select whether your enquiry relates to Technology Solutions or Study Abroad Consultancy so the right team responds with next steps.",
   },
 ];
 

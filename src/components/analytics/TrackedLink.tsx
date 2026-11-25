@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, MouseEvent, ReactNode } from "react";
 import Link from "next/link";
 import {
   trackContactAction,
@@ -8,11 +8,17 @@ import {
   trackStudyAbroadCta,
   type AnalyticsVertical,
 } from "@/lib/analytics/gtag";
+import { notifyWhatsAppClick } from "@/lib/analytics/whatsappNotify";
 
 type TrackEventSpec =
   | { kind: "service"; slug: string; sourcePage: string }
   | { kind: "study_abroad"; destination: string; sourcePage: string }
-  | { kind: "contact"; channel: "whatsapp" | "phone" | "email"; sourcePage: string; vertical?: AnalyticsVertical };
+  | {
+      kind: "contact";
+      channel: "whatsapp" | "phone" | "email";
+      sourcePage: string;
+      vertical?: AnalyticsVertical;
+    };
 
 export function TrackedLink({
   href,
@@ -21,6 +27,7 @@ export function TrackedLink({
   className,
   target,
   rel,
+  onClick,
   ...rest
 }: {
   href: string;
@@ -30,7 +37,15 @@ export function TrackedLink({
   target?: string;
   rel?: string;
 } & Omit<ComponentProps<"a">, "href" | "children">) {
-  const handleClick = () => {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    onClick?.(event);
+    if (href.includes("wa.me/")) {
+      notifyWhatsAppClick({
+        sourcePage: track?.sourcePage,
+        ctaLabel: event.currentTarget.textContent?.trim() || "WhatsApp CTA",
+        href,
+      });
+    }
     if (!track) return;
     if (track.kind === "service") {
       trackServiceCta(track.slug, track.sourcePage);

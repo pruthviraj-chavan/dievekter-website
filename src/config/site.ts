@@ -104,9 +104,12 @@ export const SITE_CONFIG = {
   defaultTitle: "dieVekter | Software Solutions & Study Abroad Consultancy",
   defaultDescription:
     "DieVekter Tech provides custom website development, mobile apps, AI agents, workflow automation and Study Abroad Consultancy across Radhanagari, Kolhapur, Phondaghat, Pune, India and globally.",
-  email: "team.dievekter@gmail.com",
+  email: "info@dievekter.com",
+  notificationEmails: ["info@dievekter.tech", "info@dievekter.com"] as const,
   telephone: "+91 94048 95667",
   telephoneE164: "+919404895667",
+  secondaryTelephone: "+91 86004 69912",
+  secondaryTelephoneE164: "+918600469912",
   whatsappNumber: "919404895667",
   whatsappUrl: "https://wa.me/919404895667",
   logo: `${SITE_URL}/dievektor_full_logo.png`,

@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
-import { CheckCircle, Loader2, Send } from "lucide-react";
+import { ArrowUpRight, CheckCircle, Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -49,7 +50,10 @@ export function ContactEnquiryForm() {
   });
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedState, setSubmittedState] = useState<{
+    emailSent: boolean;
+    whatsappUrl: string;
+  } | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -71,6 +75,7 @@ export function ContactEnquiryForm() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setErrorMsg(null);
+    setSubmittedState(null);
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -98,13 +103,14 @@ export function ContactEnquiryForm() {
     trackLeadSubmission({
       vertical,
       serviceInterest: activeVerticalLabel,
-      channel: "whatsapp",
+      channel: "form",
       sourcePage: "/contact",
     });
 
     let whatsappUrl = `${SITE_CONFIG.whatsappUrl}?text=${encodeURIComponent(
       `New ${activeVerticalLabel} Enquiry from dievekter.com:\nName: ${parsed.data.name}\nEmail: ${parsed.data.email}\nPhone: ${parsed.data.phone || "Not provided"}\nVertical: ${activeVerticalLabel}\nMessage: ${parsed.data.message}`,
     )}`;
+    let emailSent = false;
 
     try {
       const res = await fetch("/api/contact", {
@@ -113,29 +119,41 @@ export function ContactEnquiryForm() {
         body: JSON.stringify(parsed.data),
       });
       if (res.ok) {
-        const json = (await res.json()) as { whatsappUrl?: string };
+        const json = (await res.json()) as {
+          whatsappUrl?: string;
+          emailSent?: boolean;
+        };
         if (json.whatsappUrl) whatsappUrl = json.whatsappUrl;
+        emailSent = Boolean(json.emailSent);
+      } else {
+        const errJson = (await res.json().catch(() => ({}))) as { error?: string };
+        setIsSubmitting(false);
+        const msg = errJson.error || "Unable to submit right now. Please try again.";
+        setErrorMsg(msg);
+        toast.error(msg);
+        return;
       }
     } catch {
-      // Fallback to direct client-generated WhatsApp handoff if offline/network interrupted
+      // Fallback gracefully if offline
     }
 
     setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast.success("Enquiry validated! Opening WhatsApp with your structured brief.");
+    setSubmittedState({ emailSent, whatsappUrl });
+    toast.success(
+      emailSent
+        ? "Enquiry emailed to our team! Opening WhatsApp as well."
+        : "Enquiry prepared! Opening WhatsApp with your structured brief.",
+    );
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-
-    window.setTimeout(() => {
-      setFormData({ name: "", email: "", phone: "", message: "", companyWebsite: "" });
-      setIsSubmitted(false);
-    }, 3000);
+    setFormData({ name: "", email: "", phone: "", message: "", companyWebsite: "" });
   };
 
   return (
     <div className="rounded-2xl border border-[#FBE0D4] bg-white p-6 sm:p-8 shadow-sm">
       <h2 className="text-2xl font-bold text-[#141210] mb-2">Send an Enquiry</h2>
       <p className="text-xs text-stone-500 mb-6">
-        Select whether you need Technology Engineering or Study Abroad guidance.
+        Your brief is emailed straight to our desk ({SITE_CONFIG.email}) with optional instant
+        WhatsApp handoff.
       </p>
 
       <div className="mb-5 grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -162,6 +180,31 @@ export function ContactEnquiryForm() {
           );
         })}
       </div>
+
+      {submittedState && (
+        <div className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50/80 p-4 text-sm text-emerald-950">
+          <div className="flex items-start gap-2.5">
+            <CheckCircle className="h-5 w-5 shrink-0 text-emerald-600 mt-0.5" />
+            <div>
+              <p className="font-semibold">Enquiry Received!</p>
+              <p className="mt-1 text-xs text-emerald-800 leading-relaxed">
+                {submittedState.emailSent
+                  ? "Your full details have been emailed directly to our team and we will follow up shortly."
+                  : "Your brief is ready below to message our desk immediately."}
+              </p>
+              <TrackedLink
+                href={submittedState.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                track={{ kind: "contact", channel: "whatsapp", sourcePage: "/contact", vertical }}
+                className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#141210] px-4 py-1.5 text-xs font-semibold text-white hover:bg-[#FF5422] transition-colors"
+              >
+                Continue on WhatsApp <ArrowUpRight className="h-3.5 w-3.5" />
+              </TrackedLink>
+            </div>
+          </div>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         {/* Honeypot anti-spam field hidden from real visitors */}
@@ -252,31 +295,23 @@ export function ContactEnquiryForm() {
         <div className="pt-2">
           <Button
             type="submit"
-            className={cn(
-              "w-full rounded-full py-6 font-semibold text-white transition-all",
-              isSubmitted ? "bg-emerald-600 hover:bg-emerald-600" : "bg-[#FF5422] hover:bg-[#e8460e]",
-            )}
-            disabled={isSubmitting || isSubmitted}
+            className="w-full rounded-full py-6 font-semibold text-white bg-[#FF5422] hover:bg-[#e8460e] transition-all"
+            disabled={isSubmitting}
           >
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Sending Enquiry...
               </>
-            ) : isSubmitted ? (
-              <>
-                <CheckCircle className="mr-2 h-4 w-4" />
-                Ready to Send via WhatsApp
-              </>
             ) : (
               <>
                 <Send className="mr-2 h-4 w-4" />
-                Send Enquiry via WhatsApp
+                Send Enquiry via Email &amp; WhatsApp
               </>
             )}
           </Button>
           <p className="text-center text-xs text-stone-500 mt-3">
-            Submitting validates your enquiry and opens WhatsApp with your brief. See our{" "}
+            Submitting emails your brief directly to our team and opens WhatsApp. See our{" "}
             <Link href="/privacy" className="underline hover:text-[#FF5422]">
               Privacy Policy
             </Link>{" "}

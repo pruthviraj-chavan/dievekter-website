@@ -53,8 +53,8 @@ Privacy-safe custom events (stripping any personal names, phone numbers or email
 | `generate_lead` | `vertical` (`technology` / `study_abroad` / `general`), `service_interest`, `channel`, `source_page` | Submitting Contact form | **Yes** |
 | `enquiry_vertical_select` | `vertical`, `source_page` | Switching vertical pill on `/contact` | No |
 | `whatsapp_click` | `source_page`, `vertical` | Clicking WhatsApp links (Contact / CTA / Footer) | **Yes** |
-| `phone_click` | `source_page`, `vertical` | Clicking `+91 94048 95667` tel link | **Yes** |
-| `email_click` | `source_page`, `vertical` | Clicking `team.dievekter@gmail.com` mailto | Recommended |
+| `phone_click` | `source_page`, `vertical` | Clicking `+91 94048 95667` / `+91 86004 69912` tel links | **Yes** |
+| `email_click` | `source_page`, `vertical` | Clicking `info@dievekter.com` mailto | Recommended |
 | `study_abroad_cta_click` | `destination`, `source_page` | Clicking Study Abroad CTAs | No |
 | `service_cta_click` | `service_slug`, `source_page` | Clicking Technology service CTAs | No |
 | `blog_category_filter` | `category` | Clicking blog category hubs | No |
