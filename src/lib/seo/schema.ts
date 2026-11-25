@@ -114,13 +114,15 @@ export function buildLocalBusinessSchema() {
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "09:30",
-        closes: "19:00",
+        opens: hq.openingHoursSpec.opens,
+        closes: hq.openingHoursSpec.closes,
       },
     ],
     department: branches.map((branch) => ({
-      "@type": "LocalBusiness",
+      "@type": ["ProfessionalService", "LocalBusiness"],
+      "@id": `${toAbsoluteUrl(branch.locationPath)}#business`,
       name: `${SITE_CONFIG.alternateName} — ${branch.city}`,
+      url: toAbsoluteUrl(branch.locationPath),
       telephone: SITE_CONFIG.telephoneE164,
       email: SITE_CONFIG.email,
       hasMap: branch.directionsUrl,
@@ -137,10 +139,88 @@ export function buildLocalBusinessSchema() {
         latitude: branch.lat,
         longitude: branch.lng,
       },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: branch.openingHoursSpec.opens,
+          closes: branch.openingHoursSpec.closes,
+        },
+      ],
     })),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Technology & Study Abroad Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Custom Websites, Apps, AI Agents & Automation",
+            description:
+              "Next.js/React web development, mobile apps, multilingual AI chatbots & voicebots, custom retail billing software, CRM workflows and technical SEO.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Study Abroad & Study in Germany Consultancy",
+            description:
+              "Commission-free overseas education counselling, public/FH university shortlisting, APS India checklists, uni-assist filings and visa documentation guidance.",
+          },
+        },
+      ],
+    },
     areaServed: SITE_CONFIG.areaServed.map((area) => ({
       "@type": "Place",
       name: area,
+    })),
+    knowsAbout: [...SITE_CONFIG.supportedServices],
+    sameAs: [...SITE_CONFIG.sameAs],
+  };
+}
+
+export function buildLocationBranchSchema(
+  office: (typeof OFFICE_LOCATIONS)[number],
+  surroundingAreas: string[],
+) {
+  const url = toAbsoluteUrl(office.locationPath);
+  return {
+    "@type": ["ProfessionalService", "LocalBusiness"],
+    "@id": `${url}#business`,
+    name: `${SITE_CONFIG.alternateName} — ${office.city} (${office.badge})`,
+    url,
+    image: SITE_CONFIG.defaultOgImage,
+    logo: SITE_CONFIG.logo,
+    email: SITE_CONFIG.email,
+    telephone: SITE_CONFIG.telephoneE164,
+    parentOrganization: { "@id": ORG_ID },
+    hasMap: office.directionsUrl,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: office.streetAddress,
+      addressLocality: office.locality,
+      addressRegion: office.region,
+      postalCode: office.postalCode,
+      addressCountry: SITE_CONFIG.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: office.lat,
+      longitude: office.lng,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: office.openingHoursSpec.opens,
+        closes: office.openingHoursSpec.closes,
+      },
+    ],
+    areaServed: surroundingAreas.map((city) => ({
+      "@type": "Place",
+      name: `${city}, ${office.region}, India`,
     })),
     knowsAbout: [...SITE_CONFIG.supportedServices],
     sameAs: [...SITE_CONFIG.sameAs],

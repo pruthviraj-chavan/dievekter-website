@@ -81,6 +81,10 @@ async function main() {
       { path: "/blog/agentic-ai-vs-standard-chatbots-production-workflows-india", noindex: false },
       { path: "/blog/vite-react-spa-vs-nextjs-app-router-seo-core-web-vitals", noindex: false },
       { path: "/contact", noindex: false },
+      { path: "/locations", noindex: false },
+      { path: "/locations/radhanagari", noindex: false },
+      { path: "/locations/kolhapur", noindex: false },
+      { path: "/locations/phondaghat", noindex: false },
       { path: "/jobs", noindex: false },
       { path: "/internship", noindex: false },
       { path: "/ai-agents-library", noindex: false },
@@ -195,6 +199,12 @@ async function main() {
     check(
       sitemapRes.body.includes("https://www.dievekter.com/study-abroad/germany"),
       "sitemap.xml missing /study-abroad/germany",
+    );
+    check(
+      sitemapRes.body.includes("https://www.dievekter.com/locations/kolhapur") &&
+        sitemapRes.body.includes("https://www.dievekter.com/locations/radhanagari") &&
+        sitemapRes.body.includes("https://www.dievekter.com/locations/phondaghat"),
+      "sitemap.xml missing dedicated office location pages",
     );
     check(
       sitemapRes.body.includes("https://www.dievekter.com/blog/aps-certificate-india-checklist-documents-timeline-germany"),

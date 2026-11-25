@@ -1,22 +1,35 @@
 # dieVekter (DIEVEKTER / DieVekter Tech)
 
-> Registered Indian engineering & advisory enterprise (UDYAM-MH-15-0320983, D-U-N-S 312163123) based in Radhanagari, Kolhapur, Maharashtra, India.
+> Registered Indian software engineering, AI automation & Study Abroad advisory enterprise (UDYAM-MH-15-0320983, D-U-N-S 312163123) operating across Radhanagari (Head Office, PIN 416212), Kolhapur Rajarampuri (PIN 416008), and Phondaghat (PIN 416601), Maharashtra, India.
 
-## Core Business Verticals
-- Technology & Software Solutions: Custom websites, e-commerce storefronts, cross-platform mobile apps, custom business software, multilingual AI agents (Hindi, Marathi, Hinglish, English), AI chatbots, CRM & business workflow automation, API integrations, cloud & backend engineering, UI/UX design, technical SEO.
-- Study Abroad Consultancy: Overseas education counselling, university shortlisting, Study in Germany checklists (public vs private institutions, APS India, uni-assist, student visa documentation checklist alignment via DAAD and German Missions in India).
+Contact: info@dievekter.com · Primary Phone / WhatsApp: +91 94048 95667 · Secondary Phone: +91 86004 69912
 
-## Primary Pages
-- Home: https://www.dievekter.com/
-- Technology Services: https://www.dievekter.com/services
-- Study Abroad Hub: https://www.dievekter.com/study-abroad
-- Study in Germany Guide: https://www.dievekter.com/study-abroad/germany
-- Shipped Websites: https://www.dievekter.com/projects
-- Journal & Guides: https://www.dievekter.com/blog
-- About Us: https://www.dievekter.com/about
-- Contact: https://www.dievekter.com/contact
+Business Verticals:
+- Technology & Software Solutions: Custom Next.js/React websites, e-commerce storefronts, cross-platform mobile apps, custom retail billing & stock software, multilingual AI agents (Hindi, Marathi, Hinglish, English), AI chatbots, CRM & business workflow automation, API integrations, cloud & backend engineering, UI/UX design, technical SEO.
+- Study Abroad Consultancy: Overseas education counselling, commission-free university shortlisting, Study in Germany guidance (public Universität vs Hochschule, APS India verification, uni-assist VPD, student visa documentation checklist aligned with DAAD and German Missions in India).
 
-## Contact
-- Email: info@dievekter.com
-- Phone / WhatsApp: +91 94048 95667
-- Secondary Phone: +91 86004 69912
+## Core Hubs & Overview
+
+- [Homepage](https://www.dievekter.com/): Main studio overview across Technology Solutions, Study Abroad Consultancy, shipped projects, and regional offices
+- [Technology Services Hub](https://www.dievekter.com/services): Full service directory covering web development, mobile apps, AI agents, automation, APIs, and technical SEO
+- [Study Abroad Consultancy](https://www.dievekter.com/study-abroad): Overseas education advising workflow, profile matching, and admissions readiness
+- [Study in Germany Guide](https://www.dievekter.com/study-abroad/germany): Comprehensive guide to public German universities, APS India, uni-assist, Sperrkonto, and visas
+- [Shipped Client Projects](https://www.dievekter.com/projects): Live web platforms built by dieVekter including Bhrigu Tech, New Door Properties, The Eventors, Jaihind Electricals, Mahaa Connect News, VFA Gym, Phonda Education Society, and Incite Computer
+- [Editorial Journal & Guides](https://www.dievekter.com/blog): 23 in-depth engineering, AI, SEO, and Study Abroad / Germany checklists
+- [About DIEVEKTER](https://www.dievekter.com/about): Leadership team, verified credentials, and engineering background
+- [Contact & Enquiry](https://www.dievekter.com/contact): Direct enquiry intake routing across Technology Solutions and Study Abroad Consultancy
+
+## Office Locations
+
+- [All Offices Overview](https://www.dievekter.com/locations): Interactive maps and directions across Radhanagari, Kolhapur, and Phondaghat
+- [Radhanagari Head Office (416212)](https://www.dievekter.com/locations/radhanagari): SH-179, Kolhapur-Radhanagari Rd — Software Engineering HQ & AI Lab
+- [Kolhapur Rajarampuri Branch (416008)](https://www.dievekter.com/locations/kolhapur): Sunlee Towers 3rd Floor, Rajarampuri 10th Lane — Study Abroad & Client Consulting Studio
+- [Phondaghat Branch (416601)](https://www.dievekter.com/locations/phondaghat): Gandhi Chowk, Patelwadi — Sindhudurg & Konkan Tech and Student Center
+
+## Optional
+
+- [Careers & Open Roles](https://www.dievekter.com/jobs): Engineering and growth roles with direct application form
+- [Student Internships](https://www.dievekter.com/internship): Software and AI engineering internship programs
+- [Developer Kit](https://www.dievekter.com/development-kit): Free browser developer utilities
+- [Privacy Policy](https://www.dievekter.com/privacy): Data processing matrix, DPDP Act 2023 disclosures, and cookie controls
+- [Terms of Service](https://www.dievekter.com/terms): Commercial engineering and Study Abroad consultancy disclosures

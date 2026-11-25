@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Building2, Code, Mail, MapPin, Phone, Send } from "lucide-react";
 import { SiteNav } from "@/components/dv/SiteNav";
 import { SiteFooter } from "@/components/dv/SiteFooter";
@@ -175,10 +176,23 @@ export default function ContactPage() {
                       <MapPin className="h-5 w-5" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="text-base font-bold text-[#141210]">Regional Branches</h3>
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="text-base font-bold text-[#141210]">Regional Branches</h3>
+                        <Link
+                          href="/locations"
+                          className="text-xs font-semibold text-[#FF5422] hover:underline"
+                        >
+                          All Offices →
+                        </Link>
+                      </div>
                       {OFFICE_LOCATIONS.slice(1).map((branch) => (
                         <div key={branch.id} className="text-xs text-stone-600 leading-relaxed">
-                          <span className="font-semibold text-[#141210]">{branch.city}: </span>
+                          <Link
+                            href={branch.locationPath}
+                            className="font-semibold text-[#141210] hover:text-[#FF5422] underline underline-offset-2"
+                          >
+                            {branch.city}:
+                          </Link>{" "}
                           {branch.address}
                         </div>
                       ))}

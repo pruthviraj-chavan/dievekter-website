@@ -81,7 +81,7 @@ export const FOOTER_COLUMNS = [
       { name: "Systems Portfolio", href: "/portfolio" },
       { name: "Software Products", href: "/products" },
       { name: "Editorial Journal", href: "/blog" },
-      { name: "Office Locations", href: "/contact#office-maps" },
+      { name: "Office Locations", href: "/locations" },
       { name: "Careers & Jobs", href: "/jobs" },
       { name: "Internships", href: "/internship" },
     ],

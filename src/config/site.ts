@@ -5,6 +5,8 @@ export const SITE_URL = rawSiteUrl.replace(/\/+$/, "");
 
 export interface OfficeLocation {
   id: string;
+  slug: "radhanagari" | "kolhapur" | "phondaghat";
+  locationPath: string;
   badge: string;
   title: string;
   city: string;
@@ -16,6 +18,7 @@ export interface OfficeLocation {
   lat: number;
   lng: number;
   hours: string;
+  openingHoursSpec: { opens: string; closes: string };
   embedUrl: string;
   directionsUrl: string;
   highlights: string[];
@@ -24,6 +27,8 @@ export interface OfficeLocation {
 export const OFFICE_LOCATIONS: OfficeLocation[] = [
   {
     id: "radhanagari-hq",
+    slug: "radhanagari",
+    locationPath: "/locations/radhanagari",
     badge: "Head Office",
     title: "Radhanagari Engineering HQ",
     city: "Radhanagari",
@@ -35,6 +40,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     lat: 16.410131,
     lng: 73.993576,
     hours: "Mon – Sat · 09:30 AM – 07:00 PM IST",
+    openingHoursSpec: { opens: "09:30", closes: "19:00" },
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.2892256791583!2d73.99357637613181!3d16.410130984320165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc045a00a4cb8c5%3A0xf83bf8bad612c6f1!2sdievekter!5e0!3m2!1sen!2sin!4v1795613648308!5m2!1sen!2sin",
     directionsUrl:
@@ -47,6 +53,8 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
   },
   {
     id: "kolhapur-rajarampuri",
+    slug: "kolhapur",
+    locationPath: "/locations/kolhapur",
     badge: "Kolhapur City Branch",
     title: "Kolhapur — Rajarampuri Studio",
     city: "Kolhapur",
@@ -60,6 +68,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     lat: 16.692757,
     lng: 74.241822,
     hours: "Mon – Sat · 10:00 AM – 07:00 PM IST",
+    openingHoursSpec: { opens: "10:00", closes: "19:00" },
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3821.682641287329!2d74.24182207613666!3d16.692757084080885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1016fe75c661d%3A0x8a7bd86a3b2f85f!2sChitale%20Xpress%20-%20Rajarampuri%2C%20Kolhapur!5e0!3m2!1sen!2sin!4v1795613755338!5m2!1sen!2sin",
     directionsUrl:
@@ -72,6 +81,8 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
   },
   {
     id: "phondaghat-branch",
+    slug: "phondaghat",
+    locationPath: "/locations/phondaghat",
     badge: "Phondaghat Branch",
     title: "Phondaghat Counseling & Tech Center",
     city: "Phondaghat",
@@ -84,6 +95,7 @@ export const OFFICE_LOCATIONS: OfficeLocation[] = [
     lat: 16.372275,
     lng: 73.792733,
     hours: "Mon – Sat · 10:00 AM – 06:30 PM IST",
+    openingHoursSpec: { opens: "10:00", closes: "18:30" },
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3828.0331292910373!2d73.79273327613141!3d16.372274684351705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc039a51ce77e3d%3A0x51ba1b43a58853ef!2sIncite%20Computer%20Phondaghat!5e0!3m2!1sen!2sin!4v1795613741712!5m2!1sen!2sin",
     directionsUrl:
