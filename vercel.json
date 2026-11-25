@@ -7,10 +7,32 @@
       "has": [
         {
           "type": "host",
+          "value": "dievekter.com"
+        }
+      ],
+      "destination": "https://www.dievekter.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
           "value": "dievekter.tech"
         }
       ],
-      "destination": "https://www.dievekter.tech/$1",
+      "destination": "https://www.dievekter.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dievekter.tech"
+        }
+      ],
+      "destination": "https://www.dievekter.com/$1",
       "permanent": true
     }
   ],

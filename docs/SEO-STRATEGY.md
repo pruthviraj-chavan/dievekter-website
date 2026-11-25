@@ -1,7 +1,7 @@
 # DieVekter Tech — Organic Growth & Dual-Vertical SEO Strategy
 
 **Brand:** DIEVEKTER (`dieVekter` / `DieVekter Tech`)  
-**Domain:** `https://www.dievekter.tech`  
+**Domain:** `https://www.dievekter.com`  
 **Primary Hub:** Radhanagari, Kolhapur, Maharashtra, India (serving Kolhapur, Pune, Maharashtra, pan-India & international remote clients)
 
 ---

@@ -1,6 +1,6 @@
 # DieVekter Tech — Technical & Content SEO Audit
 
-**Domain Audited:** `https://www.dievekter.tech`  
+**Domain Audited:** `https://www.dievekter.com`  
 **Business Entity:** DIEVEKTER (`dieVekter`), Radhanagari, Kolhapur, Maharashtra, India (`UDYAM-MH-15-0320983`, `D-U-N-S 312163123`)  
 **Audit Scope:** Full React + Vite codebase inspection prior to SEO transformation and verification of post-fix architecture.
 

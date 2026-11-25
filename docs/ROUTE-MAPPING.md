@@ -31,7 +31,7 @@
 
 Configured in `next.config.ts` (`async redirects()`) and `vercel.json`:
 
-- Host canonicalization (`vercel.json`): `https://dievekter.tech/*` -> `https://www.dievekter.tech/$1` (`permanent: true`).
+- Host canonicalization (`vercel.json`): `https://dievekter.com/*` -> `https://www.dievekter.com/$1` (`permanent: true`).
 - Legacy slug normalization (`next.config.ts`):
   - `/services/custom-website-development` -> `/services/website-development`
   - `/services/ecommerce-solutions` -> `/services/ecommerce-development`

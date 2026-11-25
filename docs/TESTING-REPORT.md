@@ -18,7 +18,7 @@ Executed `node scripts/verify-nextjs-production.mjs`, which spawns a real produc
   - HTTP `200` confirmed on all 33 routes.
   - Unique, non-empty `<title>` confirmed on all 33 routes (0 duplicates).
   - Non-empty `<meta name="description">` confirmed on all 33 routes.
-  - Self-referencing `https://www.dievekter.tech` canonical `<link>` confirmed on all 31 indexable routes; `noindex` meta/header verified on `/fun` and `/services/refer`.
+  - Self-referencing `https://www.dievekter.com` canonical `<link>` confirmed on all 31 indexable routes; `noindex` meta/header verified on `/fun` and `/services/refer`.
   - Exactly one `<h1>` tag verified on all 33 routes.
   - Valid parseable `application/ld+json` Schema.org graphs verified on all 33 routes.
   - Stripped HTML SSR body text (`>= 400` chars) verified directly from server HTML without JavaScript execution.

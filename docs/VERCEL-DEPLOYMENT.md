@@ -12,8 +12,8 @@ When importing or updating the project in the Vercel Dashboard (`Project Setting
 
 ## 2. Domain & Redirect Configuration (`vercel.json` + `next.config.ts`)
 
-- Set **`www.dievekter.tech`** as the primary custom domain in Vercel Project Settings -> Domains.
-- Add **`dievekter.tech`** apex domain in Vercel; `vercel.json` enforces a permanent redirect from `dievekter.tech/*` to `https://www.dievekter.tech/$1`.
+- Set **`www.dievekter.com`** as the primary custom domain in Vercel Project Settings -> Domains.
+- Add **`dievekter.com`** apex domain in Vercel; `vercel.json` enforces a permanent redirect from `dievekter.com/*` to `https://www.dievekter.com/$1`.
 - Route-level canonical redirects (`/services/custom-website-development`, `/services/ecommerce-solutions`, `/services/api-development`, `/services/web-hosting`, `/about-us`, `/contact-us`, `/privacy-policy`, `/terms-and-conditions`, `/blog/category/:category`) live inside `next.config.ts` (`async redirects()`), preventing duplicated rules between Vercel edge config and Next.js routing.
 - Legacy Vite overrides (`cleanUrls`, `trailingSlash`, custom `.js` Content-Type overrides, and blanket `Access-Control-Allow-Origin: *`) were removed from `vercel.json`.
 
@@ -21,8 +21,8 @@ When importing or updating the project in the Vercel Dashboard (`Project Setting
 
 Configure the following per environment (**Production** vs **Preview**):
 
-- `NEXT_PUBLIC_SITE_URL`: `https://www.dievekter.tech` (Production; keeps canonicals clean across previews too).
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: Production GA4 measurement ID (e.g. `G-VTEJ29Y132`).
+- `NEXT_PUBLIC_SITE_URL`: `https://www.dievekter.com` (Production; keeps canonicals clean across previews too).
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: Production GA4 measurement ID (e.g. `G-XLDPHSXXCS`).
 - `CONTACT_WEBHOOK_URL` & `ENQUIRY_FORWARD_EMAIL`: Server-only CRM/webhook forwarding targets (optional; WhatsApp fallback still succeeds if omitted).
 
 ## 4. Recommended Rollout Workflow

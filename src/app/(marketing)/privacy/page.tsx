@@ -166,7 +166,7 @@ export default function PrivacyPage() {
                 <Lock className="h-5 w-5 text-[#FF5422]" /> 3. Data Storage &amp; Security
               </h2>
               <p>
-                All communications over www.dievekter.tech use encrypted HTTPS transport with modern
+                All communications over www.dievekter.com use encrypted HTTPS transport with modern
                 transport security headers. Academic transcripts and sensitive identification papers
                 for Study Abroad applications are requested only after formal onboarding.
               </p>
@@ -190,7 +190,7 @@ export default function PrivacyPage() {
               <p>
                 Our Study Abroad and developer pages link out to primary authoritative portals such
                 as DAAD, APS India, uni-assist, and diplomatic mission websites. Their respective
-                privacy policies govern interactions once you leave www.dievekter.tech.
+                privacy policies govern interactions once you leave www.dievekter.com.
               </p>
             </div>
 

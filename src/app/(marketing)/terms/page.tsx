@@ -58,7 +58,7 @@ export default function TermsPage() {
               Terms of Service &amp; Disclosures
             </h1>
             <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-              Terms governing the use of www.dievekter.tech, software &amp; AI consulting
+              Terms governing the use of www.dievekter.com, software &amp; AI consulting
               engagements, and Study Abroad Consultancy guidance offered by {SITE_CONFIG.legalName} (&ldquo;dieVekter&rdquo;).
             </p>
             <p className="mt-3 text-xs text-stone-400">Last updated: October 2026</p>

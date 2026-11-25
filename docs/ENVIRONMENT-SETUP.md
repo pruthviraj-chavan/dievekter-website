@@ -6,8 +6,8 @@ All documented configuration variables live in `.env.example` (no secrets commit
 
 | Variable | Required | Default | Purpose |
 | --- | --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Yes (Prod) | `https://www.dievekter.tech` | Sets `metadataBase`, canonical URLs, JSON-LD `@id` URLs, `robots.txt` sitemap URL, and `sitemap.xml` hosts |
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Recommended | `G-VTEJ29Y132` | Enables GA4 tag loading & route-change tracking inside `RootLayout` and `AnalyticsRouteTracker` |
+| `NEXT_PUBLIC_SITE_URL` | Yes (Prod) | `https://www.dievekter.com` | Sets `metadataBase`, canonical URLs, JSON-LD `@id` URLs, `robots.txt` sitemap URL, and `sitemap.xml` hosts |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Recommended | `G-XLDPHSXXCS` | Enables GA4 tag loading & route-change tracking inside `RootLayout` and `AnalyticsRouteTracker` |
 | `NEXT_PUBLIC_JOTFORM_AGENT_ID` | Optional | Project default ID | Loads the interactive Jotform AI agent script via `next/script` (`lazyOnload`) |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Optional | Unset | Emits `<meta name="google-site-verification">` if configuring DNS-free verification |
 | `NEXT_PUBLIC_BING_VERIFICATION` | Optional | Unset | Emits `<meta name="msvalidate.01">` for Bing Webmaster Tools |
@@ -21,7 +21,7 @@ All documented configuration variables live in `.env.example` (no secrets commit
 
 ## 3. Vercel Platform Environment Variable Note
 
-- `VERCEL_ENV` is automatically injected by Vercel (`production`, `preview`, or `development`). When `VERCEL_ENV !== "production"`, Next.js automatically enforces `noindex, nofollow` in both `buildPageMetadata()`, `robots.ts`, and `next.config.ts` `X-Robots-Tag` headers so preview deployments never compete with `www.dievekter.tech`.
+- `VERCEL_ENV` is automatically injected by Vercel (`production`, `preview`, or `development`). When `VERCEL_ENV !== "production"`, Next.js automatically enforces `noindex, nofollow` in both `buildPageMetadata()`, `robots.ts`, and `next.config.ts` `X-Robots-Tag` headers so preview deployments never compete with `www.dievekter.com`.
 
 ## 4. Local Setup
 

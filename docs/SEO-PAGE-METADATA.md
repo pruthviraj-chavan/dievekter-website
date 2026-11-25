@@ -8,7 +8,7 @@ All titles, descriptions, canonical policies, headings and JSON-LD types below a
 
 | Route | `<title>` | H1 | Indexing | JSON-LD Entities |
 | :--- | :--- | :--- | :--- | :--- |
-| `/` | `dieVekter \| Software Development, AI Agents & Study Abroad Consultancy` | Technology Solutions. Global Education Opportunities. | `index, follow` (`https://www.dievekter.tech/`) | `WebPage`, `Organization`, `LocalBusiness`, `WebSite`, `FAQPage` |
+| `/` | `dieVekter \| Software Development, AI Agents & Study Abroad Consultancy` | Technology Solutions. Global Education Opportunities. | `index, follow` (`https://www.dievekter.com/`) | `WebPage`, `Organization`, `LocalBusiness`, `WebSite`, `FAQPage` |
 | `/about` | `About dieVekter \| Technology Studio & Study Abroad Advisory in India` | A focused studio for businesses with big plans. | `index, follow` | `WebPage`, `BreadcrumbList`, `Organization`, `LocalBusiness` |
 | `/contact` | `Contact dieVekter \| Software Development & Study Abroad Consultation` | Let's build or plan together. | `index, follow` | `WebPage`, `BreadcrumbList`, `LocalBusiness` |
 | `/projects` | `Shipped Websites & Client Projects Portfolio — dieVekter` | Our Shipped Projects. | `index, follow` | `WebPage`, `BreadcrumbList` |

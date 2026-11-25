@@ -1,6 +1,6 @@
 # DieVekter Tech — SEO Implementation Report
 
-**Target Domain:** `https://www.dievekter.tech`  
+**Target Domain:** `https://www.dievekter.com`  
 **Build Pipeline:** Vite `5.4.10` + React `18.3.1` + Static SSR Prerender (`scripts/prerender.mjs`)  
 **Verification Run Status:** Passed (`tsc --noEmit`, `npm run build`, `npm run seo:check`)
 
@@ -9,7 +9,7 @@
 ## 1. Summary of Architecture & Code Changes Implemented
 
 ### A. Centralized SEO Engine, Schema Graph & Analytics
-- **`src/data/seoConfig.ts`:** Single source of truth for canonical base URL (`VITE_SITE_URL` defaulting to `https://www.dievekter.tech`), verified `SITE_INFO`, normalized canonical builders, `STATIC_ROUTE_META` route registry, and Schema.org builders (`Organization`, `ProfessionalService`/`LocalBusiness`, `WebSite` with `SearchAction`, `Service`, `BreadcrumbList`, `BlogPosting` + `Person`, `FAQPage`).
+- **`src/data/seoConfig.ts`:** Single source of truth for canonical base URL (`VITE_SITE_URL` defaulting to `https://www.dievekter.com`), verified `SITE_INFO`, normalized canonical builders, `STATIC_ROUTE_META` route registry, and Schema.org builders (`Organization`, `ProfessionalService`/`LocalBusiness`, `WebSite` with `SearchAction`, `Service`, `BreadcrumbList`, `BlogPosting` + `Person`, `FAQPage`).
 - **`src/components/seo/SeoHead.tsx`:** Emits unique `<title>`, `<meta name="description">`, `<meta name="robots">`, conditional `<link rel="canonical">` (suppressed automatically when `noindex` is true), Open Graph (`en_IN`), Twitter Card metadata, and a single `@graph` JSON-LD `<script>` tag per route without emitting obsolete `<meta name="keywords">`.
 - **`src/lib/analytics.ts`:** Configurable GA4 event helper using `VITE_GA_MEASUREMENT_ID` (defaulting to `G-XLDPHSXXCS`), scrubbing any sensitive PII fields before sending events (`generate_lead`, `enquiry_vertical_select`, `whatsapp_click`, `phone_click`, `email_click`, `study_abroad_cta_click`, `service_cta_click`, `blog_category_filter`, SPA `page_view`).
 - **`src/components/CanonicalUrl.tsx`:** Simplified to client-side scroll restoration and post-navigation GA4 `page_view` tracking so canonical/robots control remains unified in `SeoHead.tsx`.
@@ -44,5 +44,5 @@
 ## 3. Items Pending External Execution / Confirmation
 
 1. **Chrome DevTools Visual & Lighthouse Audit:** Chrome remote debugging (`DevToolsActivePort`) was unavailable in the host environment; run mobile and desktop Lighthouse audits on the deployed Vercel preview/production URLs directly.
-2. **External Webmaster & Analytics Activation:** Verify DNS ownership in Google Search Console & Bing Webmaster Tools, submit `https://www.dievekter.tech/sitemap.xml`, test URLs in Rich Results Test, and mark `generate_lead` / `whatsapp_click` / `phone_click` as Key Events inside GA4.
+2. **External Webmaster & Analytics Activation:** Verify DNS ownership in Google Search Console & Bing Webmaster Tools, submit `https://www.dievekter.com/sitemap.xml`, test URLs in Rich Results Test, and mark `generate_lead` / `whatsapp_click` / `phone_click` as Key Events inside GA4.
 3. **Owner Business Confirmations:** Confirm public Study Abroad consultancy pricing ranges (when ready to publish) and exact street address / office hours before adding `streetAddress` to Schema.org or creating a Google Business Profile.

@@ -17,9 +17,9 @@
 
 ## Owner Post-Deployment Action Items (External & Pending Confirmation)
 
-- [ ] **Deploy to Production:** Push updated code to Vercel and verify `https://www.dievekter.tech` serves `200 OK` HTML with populated `<div id="root">` (e.g., via View Page Source on `/`, `/services/website-development`, and `/study-abroad/germany`)
-- [ ] **Verify 301 Redirects Live:** Confirm `https://dievekter.tech/` -> `https://www.dievekter.tech/` and `/services/custom-website-development` -> `/services/website-development` return permanent HTTP redirects cleanly
-- [ ] **Google Search Console:** Complete DNS TXT verification and submit `https://www.dievekter.tech/sitemap.xml`
+- [ ] **Deploy to Production:** Push updated code to Vercel and verify `https://www.dievekter.com` serves `200 OK` HTML with populated `<div id="root">` (e.g., via View Page Source on `/`, `/services/website-development`, and `/study-abroad/germany`)
+- [ ] **Verify 301 Redirects Live:** Confirm `https://dievekter.com/` -> `https://www.dievekter.com/` and `/services/custom-website-development` -> `/services/website-development` return permanent HTTP redirects cleanly
+- [ ] **Google Search Console:** Complete DNS TXT verification and submit `https://www.dievekter.com/sitemap.xml`
 - [ ] **Rich Results & Schema Check:** Run Google Rich Results Test on `/`, `/services/ai-agents`, `/study-abroad/germany`, `/blog/study-in-germany-complete-guide-indian-students`, and `/contact`
 - [ ] **Browser Lighthouse Audit:** Run Chrome DevTools Lighthouse (Mobile & Desktop) on production URL for Core Web Vitals verification (Chrome remote debugging was unavailable in the sandbox during implementation)
 - [ ] **Confirm Business Confirmation Items:** Confirm exact consultancy fee ranges/structure before publishing pricing tables, and confirm exact public office street address/hours before adding `streetAddress` or launching Google Business Profile

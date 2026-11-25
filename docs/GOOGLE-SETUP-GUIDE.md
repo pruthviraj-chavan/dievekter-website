@@ -1,6 +1,6 @@
 # Google Search Console, Bing Webmaster & GA4 Setup Guide
 
-Follow these owner verification steps after deploying the updated build to Vercel (`https://www.dievekter.tech`).
+Follow these owner verification steps after deploying the updated build to Vercel (`https://www.dievekter.com`).
 
 ---
 
@@ -9,7 +9,7 @@ Follow these owner verification steps after deploying the updated build to Verce
 The codebase reads these optional environment variables at build time (clean defaults remain active even if unset):
 
 ```bash
-VITE_SITE_URL=https://www.dievekter.tech
+VITE_SITE_URL=https://www.dievekter.com
 VITE_GA_MEASUREMENT_ID=G-XLDPHSXXCS
 ```
 
@@ -20,19 +20,19 @@ Set them cleanly inside **Vercel Dashboard -> Project Settings -> Environment Va
 ## 2. Google Search Console Verification & Sitemap Submission
 
 1. Sign in to [Google Search Console](https://search.google.com/search-console).
-2. Add Property -> Choose **Domain Property** (`dievekter.tech`) OR **URL Prefix** (`https://www.dievekter.tech/`).  
-   - **Recommended:** Domain verification via TXT DNS record at your domain registrar so both `dievekter.tech` (301 redirect) and `www.dievekter.tech` (canonical) are monitored together.
+2. Add Property -> Choose **Domain Property** (`dievekter.com`) OR **URL Prefix** (`https://www.dievekter.com/`).  
+   - **Recommended:** Domain verification via TXT DNS record at your domain registrar so both `dievekter.com` (301 redirect) and `www.dievekter.com` (canonical) are monitored together.
 3. Open **Indexing -> Sitemaps** -> Submit:  
-   `https://www.dievekter.tech/sitemap.xml`
+   `https://www.dievekter.com/sitemap.xml`
 4. Use **URL Inspection -> Test Live URL -> Request Indexing** for high-priority pages:
-   - `https://www.dievekter.tech/`
-   - `https://www.dievekter.tech/services`
-   - `https://www.dievekter.tech/services/website-development`
-   - `https://www.dievekter.tech/services/ai-agents`
-   - `https://www.dievekter.tech/study-abroad`
-   - `https://www.dievekter.tech/study-abroad/germany`
-   - `https://www.dievekter.tech/blog/study-in-germany-complete-guide-indian-students`
-   - `https://www.dievekter.tech/contact`
+   - `https://www.dievekter.com/`
+   - `https://www.dievekter.com/services`
+   - `https://www.dievekter.com/services/website-development`
+   - `https://www.dievekter.com/services/ai-agents`
+   - `https://www.dievekter.com/study-abroad`
+   - `https://www.dievekter.com/study-abroad/germany`
+   - `https://www.dievekter.com/blog/study-in-germany-complete-guide-indian-students`
+   - `https://www.dievekter.com/contact`
 
 ---
 
@@ -40,7 +40,7 @@ Set them cleanly inside **Vercel Dashboard -> Project Settings -> Environment Va
 
 1. Open [Bing Webmaster Tools](https://www.bing.com/webmasters/).
 2. You can import verified properties directly from Google Search Console or verify via DNS TXT record.
-3. Submit `https://www.dievekter.tech/sitemap.xml`.
+3. Submit `https://www.dievekter.com/sitemap.xml`.
 
 ---
 

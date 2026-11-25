@@ -23,7 +23,7 @@ To solve client-only empty `#root` rendering without rewriting the site onto ano
 
 ## 2. Canonical, Redirect & HTTP Status Hygiene (`vercel.json`)
 
-- **Host Canonicalization:** Permanent 301 redirect from `dievekter.tech/*` -> `https://www.dievekter.tech/$1`.
+- **Host Canonicalization:** Permanent 301 redirect from `dievekter.com/*` -> `https://www.dievekter.com/$1`.
 - **Legacy Alias 301 Redirects:**
   - `/services/custom-website-development` -> `/services/website-development`
   - `/services/ecommerce-solutions` -> `/services/ecommerce-development`
@@ -42,7 +42,7 @@ To solve client-only empty `#root` rendering without rewriting the site onto ano
 
 - Removed deprecated `<meta name="keywords">` globally from `index.html`, `BlogPost.tsx`, and all layouts.
 - Enforced single `@graph` JSON-LD payload per route combining relevant schema types (`Organization`, `LocalBusiness` / `ProfessionalService`, `WebSite` + `SearchAction`, `WebPage`, `BreadcrumbList`, `Service`, `BlogPosting` + `Person`, and `FAQPage` tied exclusively to visible FAQ blocks).
-- Enforced configurable base URL via `VITE_SITE_URL` (default `https://www.dievekter.tech`).
+- Enforced configurable base URL via `VITE_SITE_URL` (default `https://www.dievekter.com`).
 
 ---
 

@@ -103,7 +103,7 @@ export function ContactEnquiryForm() {
     });
 
     let whatsappUrl = `${SITE_CONFIG.whatsappUrl}?text=${encodeURIComponent(
-      `New ${activeVerticalLabel} Enquiry from dievekter.tech:\nName: ${parsed.data.name}\nEmail: ${parsed.data.email}\nPhone: ${parsed.data.phone || "Not provided"}\nVertical: ${activeVerticalLabel}\nMessage: ${parsed.data.message}`,
+      `New ${activeVerticalLabel} Enquiry from dievekter.com:\nName: ${parsed.data.name}\nEmail: ${parsed.data.email}\nPhone: ${parsed.data.phone || "Not provided"}\nVertical: ${activeVerticalLabel}\nMessage: ${parsed.data.message}`,
     )}`;
 
     try {

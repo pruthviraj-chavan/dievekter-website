@@ -15,7 +15,7 @@ Use the exact verified business identity consistently across the website, Schema
 - **State / Country:** Maharashtra, India
 - **Primary Phone / WhatsApp:** `+91 94048 95667`
 - **Primary Email:** `team.dievekter@gmail.com`
-- **Website:** `https://www.dievekter.tech/`
+- **Website:** `https://www.dievekter.com/`
 
 ---
 

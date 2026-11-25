@@ -7,14 +7,14 @@
 - Study Abroad Consultancy: Overseas education counselling, university shortlisting, Study in Germany checklists (public vs private institutions, APS India, uni-assist, student visa documentation checklist alignment via DAAD and German Missions in India).
 
 ## Primary Pages
-- Home: https://www.dievekter.tech/
-- Technology Services: https://www.dievekter.tech/services
-- Study Abroad Hub: https://www.dievekter.tech/study-abroad
-- Study in Germany Guide: https://www.dievekter.tech/study-abroad/germany
-- Shipped Websites: https://www.dievekter.tech/projects
-- Journal & Guides: https://www.dievekter.tech/blog
-- About Us: https://www.dievekter.tech/about
-- Contact: https://www.dievekter.tech/contact
+- Home: https://www.dievekter.com/
+- Technology Services: https://www.dievekter.com/services
+- Study Abroad Hub: https://www.dievekter.com/study-abroad
+- Study in Germany Guide: https://www.dievekter.com/study-abroad/germany
+- Shipped Websites: https://www.dievekter.com/projects
+- Journal & Guides: https://www.dievekter.com/blog
+- About Us: https://www.dievekter.com/about
+- Contact: https://www.dievekter.com/contact
 
 ## Contact
 - Email: team.dievekter@gmail.com

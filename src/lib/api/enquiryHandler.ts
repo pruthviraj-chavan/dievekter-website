@@ -115,7 +115,7 @@ export async function handleEnquirySubmission(request: NextRequest, sourceEndpoi
       }
     }
 
-    const whatsappMessage = `New ${verticalLabel} Enquiry (${category}) via dievekter.tech:
+    const whatsappMessage = `New ${verticalLabel} Enquiry (${category}) via dievekter.com:
 Name: ${name}
 Email: ${email}
 Phone: ${phone || "Not provided"}

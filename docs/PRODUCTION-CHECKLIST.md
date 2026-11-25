@@ -14,15 +14,15 @@
 
 - [ ] Set **Framework Preset** to `Next.js` (clear any stale Vite build command or `dist` output directory override)
 - [ ] Confirm Production Environment Variables:
-  - `NEXT_PUBLIC_SITE_URL=https://www.dievekter.tech`
-  - `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-VTEJ29Y132`
+  - `NEXT_PUBLIC_SITE_URL=https://www.dievekter.com`
+  - `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XLDPHSXXCS`
   - Optional server-only `CONTACT_WEBHOOK_URL` / `ENQUIRY_FORWARD_EMAIL`
-- [ ] Confirm primary domain `www.dievekter.tech` and apex redirect `dievekter.tech` -> `https://www.dievekter.tech/$1`
+- [ ] Confirm primary domain `www.dievekter.com` and apex redirect `dievekter.com` -> `https://www.dievekter.com/$1`
 
 ## Post-Production Verification
 
-- [ ] Verify live HTTP headers: `curl -I https://www.dievekter.tech/` returns `200 OK` without `noindex`
-- [ ] Verify `https://www.dievekter.tech/robots.txt` and `https://www.dievekter.tech/sitemap.xml` load with HTTP 200
-- [ ] Re-submit `https://www.dievekter.tech/sitemap.xml` inside Google Search Console & Bing Webmaster Tools
+- [ ] Verify live HTTP headers: `curl -I https://www.dievekter.com/` returns `200 OK` without `noindex`
+- [ ] Verify `https://www.dievekter.com/robots.txt` and `https://www.dievekter.com/sitemap.xml` load with HTTP 200
+- [ ] Re-submit `https://www.dievekter.com/sitemap.xml` inside Google Search Console & Bing Webmaster Tools
 - [ ] Test a real form submission on `/contact` (confirm Zod validation, `/api/contact` response, GA4 `generate_lead` event, and WhatsApp message handoff)
 - [ ] Monitor Vercel runtime logs & Search Console Coverage report over the first 7 days

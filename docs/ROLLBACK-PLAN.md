@@ -38,5 +38,5 @@ git checkout -b rollback/vite-restore 5656d14
 
 ## 3. Search Engine Safety After Rollback
 
-- Keep URL paths and permanent redirects (`301`/`308`) aligned (`www.dievekter.tech` canonical host, legacy `/services/*`, `/about-us`, `/contact-us`).
-- Re-submit `https://www.dievekter.tech/sitemap.xml` in Google Search Console if rolling back permanently so crawl queues stay synced.
+- Keep URL paths and permanent redirects (`301`/`308`) aligned (`www.dievekter.com` canonical host, legacy `/services/*`, `/about-us`, `/contact-us`).
+- Re-submit `https://www.dievekter.com/sitemap.xml` in Google Search Console if rolling back permanently so crawl queues stay synced.

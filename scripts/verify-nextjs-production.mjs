@@ -108,7 +108,7 @@ async function main() {
 
       if (!r.noindex) {
         const canonMatch = body.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i);
-        check(Boolean(canonMatch && canonMatch[1].startsWith("https://www.dievekter.tech")), `${r.path}: invalid canonical tag`);
+        check(Boolean(canonMatch && canonMatch[1].startsWith("https://www.dievekter.com")), `${r.path}: invalid canonical tag`);
       }
 
       const h1Matches = body.match(/<h1[\s>]/gi) || [];
@@ -176,11 +176,18 @@ async function main() {
 
     // Check sitemap & robots
     const robotsRes = await requestRaw("/robots.txt");
-    check(robotsRes.status === 200 && robotsRes.body.includes("Sitemap:"), "robots.txt invalid");
+    check(
+      robotsRes.status === 200 &&
+        robotsRes.body.includes("Sitemap: https://www.dievekter.com/sitemap.xml"),
+      "robots.txt invalid",
+    );
 
     const sitemapRes = await requestRaw("/sitemap.xml");
     check(sitemapRes.status === 200 && sitemapRes.body.includes("<urlset"), "sitemap.xml invalid");
-    check(sitemapRes.body.includes("https://www.dievekter.tech/study-abroad/germany"), "sitemap.xml missing /study-abroad/germany");
+    check(
+      sitemapRes.body.includes("https://www.dievekter.com/study-abroad/germany"),
+      "sitemap.xml missing /study-abroad/germany",
+    );
     check(!sitemapRes.body.includes("/fun"), "sitemap.xml leaked /fun");
     check(!sitemapRes.body.includes("/services/refer"), "sitemap.xml leaked /services/refer");
 

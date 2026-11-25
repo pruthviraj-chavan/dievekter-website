@@ -1,5 +1,5 @@
 const rawSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://www.dievekter.tech";
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://www.dievekter.com";
 
 export const SITE_URL = rawSiteUrl.replace(/\/+$/, "");
 
